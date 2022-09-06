@@ -38,6 +38,8 @@ const DetailPage = () => {
         boardId: router.query.id,
       },
     });
+
+    console.log(router);
     // try {
 
     // } catch (error) {

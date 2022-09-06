@@ -14,6 +14,7 @@ const Board = () => {
   const [aer, setAer] = useState("");
   const [ater, setAter] = useState("");
   const [ler, setLer] = useState("");
+  const [change, setChange] = useState(false);
   const [input, setInput] = useState({
     name: "",
     ps: "",
@@ -28,55 +29,129 @@ const Board = () => {
   console.log(input);
   const onChangeName = (event) => {
     setInput({ ...input, name: event.target.value });
-    if (event.target.value !== "") {
-      setNer("");
-    }
+    if (
+      event.target.value &&
+      input.ps &&
+      input.title &&
+      input.main &&
+      input.add &&
+      input.addo &&
+      input.addt &&
+      input.lk
+    )
+      setChange(true);
+    setNer("");
   };
 
   const onChangePs = (event) => {
     setInput({ ...input, ps: event.target.value });
-    if (event.target.value !== "") {
-      setPer("");
-    }
+    if (
+      input.name &&
+      event.target.value &&
+      input.title &&
+      input.main &&
+      input.add &&
+      input.addo &&
+      input.addt &&
+      input.lk
+    )
+      setChange(true);
+    setPer("");
   };
 
   const onChangeTitle = (event) => {
     setInput({ ...input, title: event.target.value });
-    if (event.target.value !== "") {
-      setTer("");
-    }
+    if (
+      input.name &&
+      input.ps &&
+      event.target.value &&
+      input.main &&
+      input.add &&
+      input.addo &&
+      input.addt &&
+      input.lk
+    )
+      setChange(true);
+    setTer("");
   };
 
   const onChangeMain = (event) => {
     setInput({ ...input, main: event.target.value });
-    if (event.target.value !== "") {
-      setMer("");
-    }
+    if (
+      input.name &&
+      input.ps &&
+      input.title &&
+      event.target.value &&
+      input.add &&
+      input.addo &&
+      input.addt &&
+      input.lk
+    )
+      setChange(true);
+    setMer("");
   };
 
   const onChangeAdd = (event) => {
     setInput({ ...input, add: event.target.value });
-    if (event.target.value !== "") {
-      setAer("");
-    }
+    if (
+      input.name &&
+      input.ps &&
+      input.title &&
+      input.main &&
+      event.target.value &&
+      input.addo &&
+      input.addt &&
+      input.lk
+    )
+      setChange(true);
+    setAer("");
   };
 
   const onChangeAddo = (event) => {
     setInput({ ...input, addo: event.target.value });
+    if (
+      input.name &&
+      input.ps &&
+      input.title &&
+      input.main &&
+      input.add &&
+      event.target.value &&
+      input.addt &&
+      input.lk
+    )
+      setChange(true);
   };
 
   const onChangeAddt = (event) => {
     setInput({ ...input, addt: event.target.value });
-    if (event.target.value !== "") {
-      setAter("");
-    }
+    if (
+      input.name &&
+      input.ps &&
+      input.title &&
+      input.main &&
+      input.add &&
+      input.addo &&
+      event.target.value &&
+      input.lk
+    )
+      setChange(true);
+    setAter("");
   };
 
   const onChangeLk = (event) => {
     setInput({ ...input, lk: event.target.value });
-    if (event.target.value !== "") {
-      setLer("");
-    }
+    if (
+      input.name &&
+      input.ps &&
+      input.title &&
+      input.main &&
+      input.add &&
+      input.addo &&
+      input.addt &&
+      event.target.value
+    )
+      setChange(true);
+    setLer("");
   };
 
   const onClickSignUp = async (event) => {
@@ -131,10 +206,12 @@ const Board = () => {
       input.title &&
       input.main &&
       input.add &&
+      input.addo &&
       input.addt &&
       input.lk
     ) {
       alert("게시들이 등록되었습니다.");
+      console.log(change);
     }
   };
 
@@ -156,6 +233,7 @@ const Board = () => {
       aer={aer}
       ater={ater}
       ler={ler}
+      change={change}
     />
   );
 };

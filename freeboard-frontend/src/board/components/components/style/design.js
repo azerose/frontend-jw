@@ -89,7 +89,7 @@ export const Footer = styled.div`
 export const LastButton = styled.button`
   width: 179px;
   height: 52px;
-  background: #ffd600;
+  background-color: ${({ change }) => (change ? "#ffd600" : "default")};
   border: 0px;
   font-size: 16px;
   font-weight: 500;
@@ -217,3 +217,16 @@ export const Location = styled.div`
 `;
 
 export const Triangle = styled.div``;
+
+export const ListHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+`;
+
+export const BestPost = styled.div`
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
+  justify-content:space-between: 
+`;

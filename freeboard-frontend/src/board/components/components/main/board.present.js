@@ -17,6 +17,7 @@ const BoardWriteUI = ({
   aer,
   ater,
   ler,
+  change,
 }) => {
   return (
     <S.Wrapper>
@@ -111,7 +112,9 @@ const BoardWriteUI = ({
         </S.InputBox>
       </S.WrapperDivide>
       <S.Footer>
-        <S.LastButton onClick={onClickSignUp}>등록하기</S.LastButton>
+        <S.LastButton onClick={onClickSignUp} change={change}>
+          등록하기
+        </S.LastButton>
       </S.Footer>
     </S.Wrapper>
   );

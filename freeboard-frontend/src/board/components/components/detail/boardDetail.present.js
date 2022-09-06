@@ -33,7 +33,7 @@ const BoardDetailWriteUI = ({ onClickDisLike, onClickLike, data }) => {
       </S.Main>
       <S.Footer_Wrapper>
         <S.Img_Wrapper>
-          <S.Like_Btn onClickLike={onClickLike}>
+          <S.Like_Btn onClick={onClickLike}>
             <img src="/like.png" />
           </S.Like_Btn>
           <S.Like_Count>
@@ -41,7 +41,7 @@ const BoardDetailWriteUI = ({ onClickDisLike, onClickLike, data }) => {
           </S.Like_Count>
         </S.Img_Wrapper>
         <S.Img_Wrapper>
-          <S.Like_Btn onClickDisLike={onClickDisLike}>
+          <S.Like_Btn>
             <img src="/hate.png" />
           </S.Like_Btn>
           <S.Hate_Count>
