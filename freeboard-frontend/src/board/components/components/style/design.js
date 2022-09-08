@@ -228,5 +228,73 @@ export const BestPost = styled.div`
   display: flex;
   flex-direction: row;
   border: 1px solid red;
-  justify-content:space-between: 
+  justify-content: space-between;
+`;
+
+/* A styled component. */
+export const BestPostTitle = styled.div`
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  border: 1px solid red;
+  margin-bottom: 40px;
+`;
+
+export const BestPostContents = styled.div`
+  width: 23%;
+  margin: auto;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+`;
+export const BestPostImg = styled.div`
+  background: url(/caat.jpg) no-repeat;
+  width: 100%;
+  padding-bottom: 42%;
+  background-size: cover;
+  background-position: 50% 50%;
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  &:not(:last-child) {
+    border-bottom: 1px solid #111;
+  }
+`;
+
+export const Column = styled.div`
+  width: 20%;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  line-height: 40px;
+  button {
+    border: none;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+    padding: 6px;
+  }
+`;
+
+export const ListTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px solid #111;
+  border-bottom: none;
+  div {
+    width: 20%;
+    padding: 10px 0;
+  }
+`;
+
+export const ListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #111;
 `;
