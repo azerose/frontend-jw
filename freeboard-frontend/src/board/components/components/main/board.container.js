@@ -3,10 +3,12 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router.js";
 import { CREATE_BOARD } from "../detail/boardDetail.query";
 import BoardWriteUI from "../main/board.present";
+import { UPDATE_BOARD } from "./board.queries";
 
-const Board = () => {
+const Board = (props) => {
   const router = useRouter();
-  const [createBoard] = useMutation(CREATE_BOARD);
+  const [change, setChange] = useState(false);
+
   const [ner, setNer] = useState("");
   const [per, setPer] = useState("");
   const [ter, setTer] = useState("");
@@ -14,7 +16,10 @@ const Board = () => {
   const [aer, setAer] = useState("");
   const [ater, setAter] = useState("");
   const [ler, setLer] = useState("");
-  const [change, setChange] = useState(false);
+
+  const [createBoard] = useMutation(CREATE_BOARD);
+  const [upadateBoard] = useMutation(UPDATE_BOARD);
+
   const [input, setInput] = useState({
     name: "",
     ps: "",
@@ -153,6 +158,31 @@ const Board = () => {
       setChange(true);
     setLer("");
   };
+  console.log(input.ps);
+  const onClickUpdate = async () => {
+    try {
+      const upload = await upadateBoard({
+        variables: {
+          updateBoardInput: {
+            title: input.title,
+            contents: input.main,
+            youtubeUrl: input.lk,
+            boardAddress: {
+              zipcode: input.add,
+              address: input.addo,
+              addressDetail: input.addt,
+            },
+            images: [],
+          },
+          password: input.ps,
+          boardId: router.query.id,
+        },
+      });
+      router.push(`/boards/board-detail/${upload.data.updateBoard._id}`);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
 
   const onClickSignUp = async (event) => {
     try {
@@ -234,6 +264,8 @@ const Board = () => {
       ater={ater}
       ler={ler}
       change={change}
+      onClickUpdate={onClickUpdate}
+      isEdit={props.isEdit}
     />
   );
 };

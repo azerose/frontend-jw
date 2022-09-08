@@ -27,6 +27,14 @@ const DetailPage = () => {
         variables: {
           boardId: router.query.id,
         },
+        refetchQueries: [
+          {
+            query: FETCH_BOARD,
+            variables: {
+              boardId: router.query.id,
+            },
+          },
+        ],
       });
     } catch (error) {
       console.log(error.message);
@@ -37,20 +45,31 @@ const DetailPage = () => {
       variables: {
         boardId: router.query.id,
       },
+      refetchQueries: [
+        {
+          query: FETCH_BOARD,
+          variables: {
+            boardId: router.query.id,
+          },
+        },
+      ],
     });
-
     console.log(router);
-    // try {
+  };
+  const onClickMoveEdit = () => {
+    router.push(`/boards/board-detail/${router.query.id}/edit`);
+  };
 
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
+  const onClickMoveList = () => {
+    router.push("/boards");
   };
 
   return (
     <BoardDetailWriteUI
       onClickLike={onClickLike}
       onClickDisLike={onClickDisLike}
+      onClickMoveEdit={onClickMoveEdit}
+      onClickMoveList={onClickMoveList}
       data={data}
     />
   );

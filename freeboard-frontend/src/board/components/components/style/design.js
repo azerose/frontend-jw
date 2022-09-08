@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
   margin: 0 auto;
   box-shadow: 0px 0px 10px gray;
   border: none;
+  position: relative;
 `;
 
 export const Wrapper_id = styled.div`
@@ -221,13 +222,11 @@ export const Triangle = styled.div``;
 export const ListHeader = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
 `;
 
 export const BestPost = styled.div`
   display: flex;
   flex-direction: row;
-  border: 1px solid red;
   justify-content: space-between;
 `;
 
@@ -236,8 +235,8 @@ export const BestPostTitle = styled.div`
   text-align: center;
   font-size: 36px;
   font-weight: 700;
-  border: 1px solid red;
   margin-bottom: 40px;
+  background-color: #ffe05c;
 `;
 
 export const BestPostContents = styled.div`
@@ -260,7 +259,7 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   &:not(:last-child) {
-    border-bottom: 1px solid #111;
+    border-bottom: 1px solid #bdbdbd;
   }
 `;
 
@@ -270,31 +269,75 @@ export const Column = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-
   line-height: 40px;
-  button {
-    border: none;
-    background: #111;
-    color: #fff;
-    cursor: pointer;
-    padding: 6px;
-  }
+  cursor: pointer;
 `;
 
 export const ListTitle = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  border: 1px solid #111;
+  border: 1px solid #000000;
   border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  font-size: 18px;
+  font-weight: 500;
   div {
     width: 20%;
-    padding: 10px 0;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 40px;
   }
+  margin-top: 50px;
 `;
 
 export const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #111;
+  border: 1px solid #000000;
+  border-radius: 0 0 20px 20px;
+`;
+
+export const CreateBtn = styled.button`
+  background-color: rgba(242, 242, 242, 0.4);
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  width: 23%;
+  padding: 20px;
+`;
+
+export const CreateBtnWrapper = styled.div`
+  text-align: center;
+  padding: 40px;
+`;
+
+export const BigWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const EditWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  align-items: center;
+`;
+export const EditBtnBox = styled.div`
+  width: 1200px;
+  margin: 100px auto;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const ChangeBtn = styled.button`
+  background-color: rgba(255, 212, 0, 0.6);
+  cursor: pointer;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 50px;
 `;

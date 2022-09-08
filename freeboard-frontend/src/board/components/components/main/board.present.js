@@ -10,6 +10,7 @@ const BoardWriteUI = ({
   onChangeAddo,
   onChangeAddt,
   onClickSignUp,
+  onClickUpdate,
   ner,
   per,
   ter,
@@ -18,11 +19,12 @@ const BoardWriteUI = ({
   ater,
   ler,
   change,
+  isEdit,
 }) => {
   return (
     <S.Wrapper>
       <S.Header>
-        <h3>게시물 등록</h3>
+        <h3>{isEdit ? "게시글 수정" : "게시글 등록"}</h3>
       </S.Header>
       <S.Main>
         <S.Wrapper_id>
@@ -112,8 +114,11 @@ const BoardWriteUI = ({
         </S.InputBox>
       </S.WrapperDivide>
       <S.Footer>
-        <S.LastButton onClick={onClickSignUp} change={change}>
-          등록하기
+        <S.LastButton
+          onClick={isEdit ? onClickUpdate : onClickSignUp}
+          change={change}
+        >
+          {isEdit ? "수정하기" : "등록하기"}
         </S.LastButton>
       </S.Footer>
     </S.Wrapper>
