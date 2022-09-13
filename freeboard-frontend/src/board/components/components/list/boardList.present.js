@@ -1,5 +1,5 @@
 import { getDate } from "../../../commons/utils/utils";
-import * as S from "../../../components/components/style/design";
+import * as S from "../style/design";
 
 const ListWriteUI = ({ onClickMoveCreate, data, onClickMoveDetail }) => {
   return (

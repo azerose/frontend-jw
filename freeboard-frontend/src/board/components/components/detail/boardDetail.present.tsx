@@ -1,4 +1,5 @@
 import * as S from "../style/design";
+import { IBoardDetailWriteUI } from "./boardDetail.type";
 
 const BoardDetailWriteUI = ({
   onClickMoveList,
@@ -6,7 +7,7 @@ const BoardDetailWriteUI = ({
   onClickDisLike,
   onClickLike,
   data,
-}) => {
+}: IBoardDetailWriteUI) => {
   return (
     <S.BigWrapper>
       <S.Wrapper>
@@ -26,7 +27,7 @@ const BoardDetailWriteUI = ({
             <img src="/location.png" />
           </S.Image>
           <S.Location>
-            {data?.fetchBoard.boardAddress.address}
+            {data?.fetchBoard.boardAddress?.address}
             <S.Triangle></S.Triangle>
           </S.Location>
         </S.Profile>
@@ -36,7 +37,7 @@ const BoardDetailWriteUI = ({
           <S.Content>
             {data ? data.fetchBoard.contents : "로딩중입니당..."}
           </S.Content>
-          <S.Link src={data ? data.fetchBoard.youtubeUrl : "링크를 넣으세요"} />
+          <S.Link string-src={data?.fetchBoard.youtubeUrl} />
         </S.Main>
         <S.Footer_Wrapper>
           <S.Img_Wrapper>

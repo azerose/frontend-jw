@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router.js";
 import { CREATE_BOARD } from "../detail/boardDetail.query";
-import BoardWriteUI from "../main/board.present";
+import BoardWriteUI from "./board.present";
 import { UPDATE_BOARD } from "./board.queries";
 
 const Board = (props) => {
@@ -160,20 +160,13 @@ const Board = (props) => {
   };
   console.log(input.ps);
   const onClickUpdate = async () => {
+    const updateBoardInput = {};
+    if (title) updateBoardInput.title = title;
+    if (main) updateBoardInput.main = main;
     try {
       const upload = await upadateBoard({
         variables: {
-          updateBoardInput: {
-            title: input.title,
-            contents: input.main,
-            youtubeUrl: input.lk,
-            boardAddress: {
-              zipcode: input.add,
-              address: input.addo,
-              addressDetail: input.addt,
-            },
-            images: [],
-          },
+          updateBoardInput: updateBoardInput,
           password: input.ps,
           boardId: router.query.id,
         },
@@ -266,6 +259,7 @@ const Board = (props) => {
       change={change}
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
+      data={props.data}
     />
   );
 };

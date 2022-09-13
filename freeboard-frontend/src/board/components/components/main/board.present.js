@@ -20,7 +20,9 @@ const BoardWriteUI = ({
   ler,
   change,
   isEdit,
+  data,
 }) => {
+  console.log(data);
   return (
     <S.Wrapper>
       <S.Header>
@@ -34,6 +36,8 @@ const BoardWriteUI = ({
               <S.DefaultInput
                 onChange={onChangeName}
                 placeholder="이름을 적어주세요."
+                defaultValue={data?.fetchBoard.writer || ""}
+                readOnly={!!data?.fetchBoard.writer}
               />
               <S.Error>{ner}</S.Error>
             </S.InputBox>
@@ -56,6 +60,7 @@ const BoardWriteUI = ({
             <S.DefaultInput
               onChange={onChangeTitle}
               placeholder="제목을 작성해 주세요."
+              defaultValue={data?.fetchBoard.title}
             />
             <S.Error>{ter}</S.Error>
           </S.InputBox>
@@ -66,6 +71,7 @@ const BoardWriteUI = ({
             <S.SecInput
               onChange={onChangeMain}
               placeholder="내용을 작성해주세요."
+              defaultValue={data?.fetchBoard.contents}
             />
             <S.Error>{mer}</S.Error>
           </S.InputBox>

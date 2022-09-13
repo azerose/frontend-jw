@@ -1,10 +1,6 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import {
-  DISLIKE_BOARD,
-  FETCH_BOARD,
-  LIKE_BOARD,
-} from "../detail/boardDetail.query";
+import { DISLIKE_BOARD, FETCH_BOARD, LIKE_BOARD } from "./boardDetail.query";
 import BoardDetailWriteUI from "./boardDetail.present";
 
 const DetailPage = () => {
@@ -36,7 +32,7 @@ const DetailPage = () => {
           },
         ],
       });
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };

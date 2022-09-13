@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/board/components/components/main/board.queries.js",
+    "src/board/components/components/style/design.js",
+    "src/board/components/components/main/board.present.js",
+    "src/board/components/components/list/boardList.container.js",
+    "src/board/components/components/detail/boardDetail.stylsrc/board/components/components/style/design.ts",
+    "src/board/components/components/detail/boardDetail.query.ts"
+  ],
+  "exclude": ["node_modules"]
+}

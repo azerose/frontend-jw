@@ -11,7 +11,7 @@ export const Header = styled.div`
 export const Wrapper = styled.div`
   width: 1200px;
   padding: 60px 102px;
-  margin: 0 auto;
+  margin: 100px auto;
   box-shadow: 0px 0px 10px gray;
   border: none;
   position: relative;
@@ -87,10 +87,15 @@ export const Footer = styled.div`
   justify-content: center;
 `;
 
+interface IChange {
+  change: boolean;
+}
+
 export const LastButton = styled.button`
   width: 179px;
   height: 52px;
-  background-color: ${({ change }) => (change ? "#ffd600" : "default")};
+  background-color: ${({ change }: IChange) =>
+    change ? "#ffd600" : "default"};
   border: 0px;
   font-size: 16px;
   font-weight: 500;
@@ -298,6 +303,7 @@ export const ListWrapper = styled.div`
   flex-direction: column;
   border: 1px solid #000000;
   border-radius: 0 0 20px 20px;
+  font-size: 12px;
 `;
 
 export const CreateBtn = styled.button`
