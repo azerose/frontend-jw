@@ -1,5 +1,6 @@
 import * as St from "../detail/boardDetail.styles";
 import { getDate } from "../../../commons/utils/utils";
+import { IWriteCommentUI } from "./comment.type";
 
 const WriteCommentUI = ({
   onChangeComment,
@@ -9,7 +10,7 @@ const WriteCommentUI = ({
   onClickCreateComment,
   onClickDeleteComment,
   onChangeCommentPassword,
-}) => {
+}: IWriteCommentUI) => {
   return (
     <>
       <St.Commentbox>
@@ -31,7 +32,7 @@ const WriteCommentUI = ({
         <St.Textarea
           placeholder="개인정보 쏼라쏼라"
           onChange={onChangeComment}
-          maxLength="500"
+          maxLength={500}
         ></St.Textarea>
         <div>
           <St.CommentCount>

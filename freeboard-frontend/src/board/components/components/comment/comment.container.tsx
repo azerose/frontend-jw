@@ -7,6 +7,7 @@ import WriteCommentUI from "./comment.presenter";
 import { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { DELETE_COMMENT } from "./comment.Queries";
+import { ChangeEvent, MouseEvent } from "react";
 
 const WriteComment = () => {
   const router = useRouter();
@@ -49,12 +50,12 @@ const WriteComment = () => {
   };
 
   console.log(pw);
-  const onClickDeleteComment = async (event) => {
+  const onClickDeleteComment = async (event: MouseEvent<HTMLButtonElement>) => {
     try {
       const result = await deleteBoardComment({
         variables: {
           password: prompt("비밀번호를 입력해주세요"),
-          boardCommentId: event.target.id,
+          boardCommentId: (event.target as HTMLButtonElement).id,
         },
         refetchQueries: [
           {
@@ -71,14 +72,14 @@ const WriteComment = () => {
     }
   };
 
-  const onChangeComment = (event) => {
+  const onChangeComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
   };
 
-  const onChangeWriter = (event) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
     setWriter(event.target.value);
   };
-  const onChangeCommentPassword = (event) => {
+  const onChangeCommentPassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPw(event.target.value);
   };
 

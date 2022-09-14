@@ -1,7 +1,12 @@
 import { getDate } from "../../../commons/utils/utils";
 import * as S from "../style/design";
+import { IListWriteUI } from "./boardList.type";
 
-const ListWriteUI = ({ onClickMoveCreate, data, onClickMoveDetail }) => {
+const ListWriteUI = ({
+  onClickMoveCreate,
+  data,
+  onClickMoveDetail,
+}: IListWriteUI) => {
   return (
     <S.Wrapper>
       <S.ListHeader>
