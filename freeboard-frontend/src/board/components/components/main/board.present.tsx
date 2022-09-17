@@ -1,4 +1,5 @@
 import * as S from "../style/design";
+import { IBoardWriteUI } from "./board.type";
 
 const BoardWriteUI = ({
   onChangeName,
@@ -21,7 +22,7 @@ const BoardWriteUI = ({
   change,
   isEdit,
   data,
-}) => {
+}: IBoardWriteUI) => {
   console.log(data);
   return (
     <S.Wrapper>

@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router.js";
 import { CREATE_BOARD } from "../detail/boardDetail.query";
 import BoardWriteUI from "./board.present";
 import { UPDATE_BOARD } from "./board.queries";
+import { IBoardProps, IUpdateBoardInput } from "./board.type";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUpdateBoardArgs,
+} from "../../../../commons/types/generated/types";
 
-const Board = (props) => {
+const Board = (props: IBoardProps) => {
   const router = useRouter();
   const [change, setChange] = useState(false);
 
@@ -17,8 +23,14 @@ const Board = (props) => {
   const [ater, setAter] = useState("");
   const [ler, setLer] = useState("");
 
-  const [createBoard] = useMutation(CREATE_BOARD);
-  const [upadateBoard] = useMutation(UPDATE_BOARD);
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
+  const [upadateBoard] = useMutation<
+    Pick<IMutation, "updateBoard">,
+    IMutationUpdateBoardArgs
+  >(UPDATE_BOARD);
 
   const [input, setInput] = useState({
     name: "",
@@ -32,7 +44,7 @@ const Board = (props) => {
   });
 
   console.log(input);
-  const onChangeName = (event) => {
+  const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, name: event.target.value });
     if (
       event.target.value &&
@@ -48,7 +60,7 @@ const Board = (props) => {
     setNer("");
   };
 
-  const onChangePs = (event) => {
+  const onChangePs = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, ps: event.target.value });
     if (
       input.name &&
@@ -64,7 +76,7 @@ const Board = (props) => {
     setPer("");
   };
 
-  const onChangeTitle = (event) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, title: event.target.value });
     if (
       input.name &&
@@ -80,7 +92,7 @@ const Board = (props) => {
     setTer("");
   };
 
-  const onChangeMain = (event) => {
+  const onChangeMain = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ ...input, main: event.target.value });
     if (
       input.name &&
@@ -96,7 +108,7 @@ const Board = (props) => {
     setMer("");
   };
 
-  const onChangeAdd = (event) => {
+  const onChangeAdd = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, add: event.target.value });
     if (
       input.name &&
@@ -112,7 +124,7 @@ const Board = (props) => {
     setAer("");
   };
 
-  const onChangeAddo = (event) => {
+  const onChangeAddo = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, addo: event.target.value });
     if (
       input.name &&
@@ -127,7 +139,7 @@ const Board = (props) => {
       setChange(true);
   };
 
-  const onChangeAddt = (event) => {
+  const onChangeAddt = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, addt: event.target.value });
     if (
       input.name &&
@@ -143,7 +155,7 @@ const Board = (props) => {
     setAter("");
   };
 
-  const onChangeLk = (event) => {
+  const onChangeLk = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, lk: event.target.value });
     if (
       input.name &&
@@ -160,24 +172,33 @@ const Board = (props) => {
   };
   console.log(input.ps);
   const onClickUpdate = async () => {
-    const updateBoardInput = {};
-    if (title) updateBoardInput.title = title;
-    if (main) updateBoardInput.main = main;
+    const updateBoardData: IUpdateBoardInput = {
+      password: input.ps,
+      boardId: String(router.query.id),
+      updateBoardInput: {},
+    };
+    if (input.title) updateBoardData.updateBoardInput.title = input.title;
+    if (input.main) updateBoardData.updateBoardInput.contents = input.main;
     try {
-      const upload = await upadateBoard({
-        variables: {
-          updateBoardInput: updateBoardInput,
-          password: input.ps,
-          boardId: router.query.id,
-        },
+      const updateBoardResult = await upadateBoard({
+        variables: updateBoardData,
       });
-      router.push(`/boards/board-detail/${upload.data.updateBoard._id}`);
+      // const upload = await upadateBoard({
+      //   variables: {
+      //     updateBoardInput: updateBoardInput,
+      //     password: input.ps,
+      //     boardId: String(router.query.id),
+      //   },
+      // });
+      router.push(
+        `/boards/board-detail/${updateBoardResult?.data?.updateBoard._id}`
+      );
     } catch (err) {
-      alert(err.message);
+      if (err instanceof Error) alert(err.message);
     }
   };
 
-  const onClickSignUp = async (event) => {
+  const onClickSignUp = async (event: MouseEvent<HTMLButtonElement>) => {
     try {
       const result = await createBoard({
         variables: {
@@ -197,10 +218,10 @@ const Board = (props) => {
         },
       });
       // alert(result.data.createBoard.message);
-      console.log(result.data.createBoard.id);
-      router.push(`/boards/board-detail/${result.data.createBoard._id}`);
+      console.log(result?.data?.createBoard._id);
+      router.push(`/boards/board-detail/${result?.data?.createBoard._id}`);
     } catch (error) {
-      console.log(error.message);
+      if (error instanceof Error) alert(error.message);
     }
     if (!input.name) {
       setNer("이름을 적어주세요.");

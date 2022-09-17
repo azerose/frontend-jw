@@ -3,10 +3,16 @@ import { useRouter } from "next/router";
 import { FETCH_BOARDS } from "../detail/boardDetail.query";
 import ListWriteUI from "./boardList.present";
 import { MouseEvent } from "react";
+import {
+  IQuery,
+  IQueryFetchBoardsArgs,
+} from "../../../../commons/types/generated/types";
 
 const ListWatch = () => {
   const router = useRouter();
-  const { data } = useQuery(FETCH_BOARDS);
+  const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
+    FETCH_BOARDS
+  );
   console.log(data?.fetchBoards);
 
   const onClickMoveDetail = (event: MouseEvent<HTMLDivElement>) => {

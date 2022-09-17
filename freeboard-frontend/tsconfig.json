@@ -15,17 +15,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/board/components/components/main/board.queries.js",
-    "src/board/components/components/style/design.js",
-    "src/board/components/components/main/board.present.js",
-    "src/board/components/components/list/boardList.container.js",
-    "src/board/components/components/detail/boardDetail.stylsrc/board/components/components/style/design.ts",
-    "src/board/components/components/list/boardList.container.tsx",
-    "src/board/components/components/detail/boardDetail.query.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

@@ -5,5 +5,5 @@ export interface IBoardDetailWriteUI {
   onClickMoveEdit: () => void;
   onClickDisLike: () => void;
   onClickLike: () => void;
-  data: Pick<IQuery, "fetchBoard">;
+  data?: Pick<IQuery, "fetchBoard">;
 }

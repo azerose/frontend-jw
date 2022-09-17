@@ -1,15 +1,17 @@
-import * as St from "../detail/boardDetail.styles";
-import { getDate } from "../../../commons/utils/utils";
+import * as St from "../../detail/boardDetail.styles";
 import { IWriteCommentUI } from "./comment.type";
+import { Rate } from "antd";
 
 const WriteCommentUI = ({
   onChangeComment,
-  data,
-  comment,
+  rating,
   onChangeWriter,
   onClickCreateComment,
-  onClickDeleteComment,
   onChangeCommentPassword,
+  onChangeRating,
+  writer,
+  pw,
+  comment,
 }: IWriteCommentUI) => {
   return (
     <>
@@ -19,20 +21,23 @@ const WriteCommentUI = ({
           <St.WriterInput
             placeholder="작성자를 입력해 주세요"
             onChange={onChangeWriter}
+            value={writer}
           />
           <St.PasswordInput
             type="password"
             placeholder="비밀번호"
             onChange={onChangeCommentPassword}
+            value={pw}
           />
         </div>
         <div>
-          <img src="/Star.png" />
+          <Rate onChange={onChangeRating} value={rating} />
         </div>
         <St.Textarea
           placeholder="개인정보 쏼라쏼라"
           onChange={onChangeComment}
           maxLength={500}
+          value={comment}
         ></St.Textarea>
         <div>
           <St.CommentCount>
@@ -43,20 +48,6 @@ const WriteCommentUI = ({
           </St.CommentCount>
         </div>
       </St.Commentbox>
-      <St.CommentWatchBox>
-        {data?.fetchBoardComments.map((el) => (
-          <St.CommentRow>
-            <div>
-              <St.CommentWriter>작성자 : {el.writer}</St.CommentWriter>
-              <St.DeleteBtn id={el._id} onClick={onClickDeleteComment}>
-                <img src="/delete.png" />
-              </St.DeleteBtn>
-            </div>
-            <St.CommentContents>내용 :{el.contents}</St.CommentContents>
-            <St.CommentDate>날짜: {getDate(el.createdAt)}</St.CommentDate>
-          </St.CommentRow>
-        ))}
-      </St.CommentWatchBox>
     </>
   );
 };

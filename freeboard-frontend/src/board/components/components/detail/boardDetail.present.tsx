@@ -1,5 +1,6 @@
 import * as S from "../style/design";
 import { IBoardDetailWriteUI } from "./boardDetail.type";
+import ReactPlayer from "react-player";
 
 const BoardDetailWriteUI = ({
   onClickMoveList,
@@ -37,7 +38,9 @@ const BoardDetailWriteUI = ({
           <S.Content>
             {data ? data.fetchBoard.contents : "로딩중입니당..."}
           </S.Content>
-          <S.Link string-src={data?.fetchBoard.youtubeUrl} />
+          <S.LinkWrapper>
+            <ReactPlayer url={String(data?.fetchBoard.youtubeUrl)} />
+          </S.LinkWrapper>
         </S.Main>
         <S.Footer_Wrapper>
           <S.Img_Wrapper>

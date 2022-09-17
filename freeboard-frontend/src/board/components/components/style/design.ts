@@ -162,6 +162,10 @@ export const Link = styled.iframe`
   margin: 80px auto;
 `;
 
+export const LinkWrapper = styled.div`
+  margin: 20px auto;
+`;
+
 export const Footer_Wrapper = styled.div`
   display: flex;
   flex-direction: row;

@@ -2,6 +2,10 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { DISLIKE_BOARD, FETCH_BOARD, LIKE_BOARD } from "./boardDetail.query";
 import BoardDetailWriteUI from "./boardDetail.present";
+import {
+  IQuery,
+  IQueryFetchBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 const DetailPage = () => {
   const router = useRouter();
@@ -10,11 +14,14 @@ const DetailPage = () => {
 
   console.log(router);
 
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: {
-      boardId: router.query.id,
-    },
-  });
+  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
+    FETCH_BOARD,
+    {
+      variables: {
+        boardId: String(router.query.id),
+      },
+    }
+  );
   console.log(data);
 
   const onClickLike = async () => {
@@ -32,8 +39,8 @@ const DetailPage = () => {
           },
         ],
       });
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error) {
+      if (error instanceof Error) alert(error.message);
     }
   };
   const onClickDisLike = async () => {
