@@ -3,7 +3,7 @@ import { IMutation, IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardProps {
   isEdit: boolean;
-  data?: Pick<IMutation, "createBoard">;
+  data?: Pick<IQuery, "fetchBoard">;
 }
 export interface IUpdateBoardInputs {
   title?: string;
@@ -22,19 +22,21 @@ export interface IBoardWriteUI {
   onChangeTitle: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeMain: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   onChangeLk: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeAdd: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeAddo: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeAddt: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickSignUp: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickAddressSearch: (event: MouseEvent<HTMLButtonElement>) => void;
+  onCompleteAddressSearch: (data: any) => void;
   ner: string;
   per: string;
   ter: string;
   mer: string;
-  aer: string;
   ater: string;
   ler: string;
   change: boolean;
   isEdit: boolean;
   data?: Pick<IQuery, "fetchBoard">;
+  isOpen: boolean;
+  add: string;
+  addo: string;
 }

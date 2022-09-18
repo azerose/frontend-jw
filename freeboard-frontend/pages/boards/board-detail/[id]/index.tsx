@@ -7,7 +7,7 @@ const DetailBoard = () => {
   return (
     <S.Img_Wrapper>
       <DetailPage />
-      <WriteComment />
+      <WriteComment isCommentWrite={true} />
       <WatchCommentList />
     </S.Img_Wrapper>
   );

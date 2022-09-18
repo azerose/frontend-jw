@@ -1,16 +1,24 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { DISLIKE_BOARD, FETCH_BOARD, LIKE_BOARD } from "./boardDetail.query";
+import {
+  DELETE_BOARD,
+  DISLIKE_BOARD,
+  FETCH_BOARD,
+  LIKE_BOARD,
+} from "./boardDetail.query";
 import BoardDetailWriteUI from "./boardDetail.present";
 import {
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
+import { MouseEvent } from "react";
+import { errorMsg } from "../../../../commons/modal/modalFun";
 
 const DetailPage = () => {
   const router = useRouter();
   const [likeBoard] = useMutation(LIKE_BOARD);
   const [hateBoard] = useMutation(DISLIKE_BOARD);
+  const [deleteboard] = useMutation(DELETE_BOARD);
 
   console.log(router);
 
@@ -40,7 +48,7 @@ const DetailPage = () => {
         ],
       });
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) errorMsg(error.message);
     }
   };
   const onClickDisLike = async () => {
@@ -67,12 +75,21 @@ const DetailPage = () => {
     router.push("/boards");
   };
 
+  const onClickDelete = () => {
+    deleteboard({
+      variables: { boardId: router.query.id },
+    });
+
+    router.push("/boards");
+  };
+
   return (
     <BoardDetailWriteUI
       onClickLike={onClickLike}
       onClickDisLike={onClickDisLike}
       onClickMoveEdit={onClickMoveEdit}
       onClickMoveList={onClickMoveList}
+      onClickDelete={onClickDelete}
       data={data}
     />
   );

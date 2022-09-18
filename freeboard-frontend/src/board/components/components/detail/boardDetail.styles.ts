@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Modal } from "antd";
 
 export const Commentbox = styled.div`
   border-top: 1px solid #bdbdbd;
@@ -101,4 +102,16 @@ export const PasswordInput = styled.input`
 export const DeleteBtn = styled.button`
   background: none;
   border: none;
+  cursor: pointer;
 `;
+
+export const UpdateBtn = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-left: 1px solid gray;
+`;
+
+export const PasswordModal = styled(Modal)``;
+
+export const InputPassword = styled.input``;

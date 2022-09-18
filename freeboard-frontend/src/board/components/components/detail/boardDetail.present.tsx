@@ -8,6 +8,7 @@ const BoardDetailWriteUI = ({
   onClickDisLike,
   onClickLike,
   data,
+  onClickDelete,
 }: IBoardDetailWriteUI) => {
   return (
     <S.BigWrapper>
@@ -65,6 +66,7 @@ const BoardDetailWriteUI = ({
         <S.EditWrapper>
           <S.ChangeBtn onClick={onClickMoveList}>목록</S.ChangeBtn>
           <S.ChangeBtn onClick={onClickMoveEdit}>수정</S.ChangeBtn>
+          <S.ChangeBtn onClick={onClickDelete}>삭제</S.ChangeBtn>
         </S.EditWrapper>
       </S.EditBtnBox>
     </S.BigWrapper>

@@ -10,16 +10,17 @@ import {
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
 } from "../../../../commons/types/generated/types";
+import { errorMsg, success } from "../../../../commons/modal/modalFun";
 
 const Board = (props: IBoardProps) => {
   const router = useRouter();
   const [change, setChange] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [ner, setNer] = useState("");
   const [per, setPer] = useState("");
   const [ter, setTer] = useState("");
   const [mer, setMer] = useState("");
-  const [aer, setAer] = useState("");
   const [ater, setAter] = useState("");
   const [ler, setLer] = useState("");
 
@@ -107,38 +108,6 @@ const Board = (props: IBoardProps) => {
       setChange(true);
     setMer("");
   };
-
-  const onChangeAdd = (event: ChangeEvent<HTMLInputElement>) => {
-    setInput({ ...input, add: event.target.value });
-    if (
-      input.name &&
-      input.ps &&
-      input.title &&
-      input.main &&
-      event.target.value &&
-      input.addo &&
-      input.addt &&
-      input.lk
-    )
-      setChange(true);
-    setAer("");
-  };
-
-  const onChangeAddo = (event: ChangeEvent<HTMLInputElement>) => {
-    setInput({ ...input, addo: event.target.value });
-    if (
-      input.name &&
-      input.ps &&
-      input.title &&
-      input.main &&
-      input.add &&
-      event.target.value &&
-      input.addt &&
-      input.lk
-    )
-      setChange(true);
-  };
-
   const onChangeAddt = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, addt: event.target.value });
     if (
@@ -170,7 +139,16 @@ const Board = (props: IBoardProps) => {
       setChange(true);
     setLer("");
   };
-  console.log(input.ps);
+
+  const onClickAddressSearch = () => {
+    setIsOpen(true);
+  };
+
+  const onCompleteAddressSearch = (data: any) => {
+    setInput({ ...input, addo: data.address, add: data.zonecode });
+    setIsOpen(false);
+  };
+
   const onClickUpdate = async () => {
     const updateBoardData: IUpdateBoardInput = {
       password: input.ps,
@@ -194,7 +172,7 @@ const Board = (props: IBoardProps) => {
         `/boards/board-detail/${updateBoardResult?.data?.updateBoard._id}`
       );
     } catch (err) {
-      if (err instanceof Error) alert(err.message);
+      if (err instanceof Error) errorMsg(err.message);
     }
   };
 
@@ -221,7 +199,7 @@ const Board = (props: IBoardProps) => {
       console.log(result?.data?.createBoard._id);
       router.push(`/boards/board-detail/${result?.data?.createBoard._id}`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) errorMsg(error.message);
     }
     if (!input.name) {
       setNer("이름을 적어주세요.");
@@ -235,9 +213,7 @@ const Board = (props: IBoardProps) => {
     if (!input.main) {
       setMer("내용을 작성해주세요.");
     }
-    if (!input.add) {
-      setAer("주소를 입력해 주세요.");
-    }
+
     if (!input.addt) {
       setAter("상세주소를 입력해 주세요");
     }
@@ -254,8 +230,7 @@ const Board = (props: IBoardProps) => {
       input.addt &&
       input.lk
     ) {
-      alert("게시들이 등록되었습니다.");
-      console.log(change);
+      success("게시들이 등록되었습니다.");
     }
   };
 
@@ -266,21 +241,23 @@ const Board = (props: IBoardProps) => {
       onChangeTitle={onChangeTitle}
       onChangeMain={onChangeMain}
       onChangeLk={onChangeLk}
-      onChangeAdd={onChangeAdd}
-      onChangeAddo={onChangeAddo}
       onChangeAddt={onChangeAddt}
       onClickSignUp={onClickSignUp}
+      onClickUpdate={onClickUpdate}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
+      add={input.add}
+      addo={input.addo}
       ner={ner}
       per={per}
       ter={ter}
       mer={mer}
-      aer={aer}
       ater={ater}
       ler={ler}
       change={change}
-      onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
       data={props.data}
+      isOpen={isOpen}
     />
   );
 };

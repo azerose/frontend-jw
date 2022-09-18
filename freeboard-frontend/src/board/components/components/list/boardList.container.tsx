@@ -13,7 +13,6 @@ const ListWatch = () => {
   const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
     FETCH_BOARDS
   );
-  console.log(data?.fetchBoards);
 
   const onClickMoveDetail = (event: MouseEvent<HTMLDivElement>) => {
     router.push(`/boards/board-detail/${(event.target as HTMLDivElement).id}`);

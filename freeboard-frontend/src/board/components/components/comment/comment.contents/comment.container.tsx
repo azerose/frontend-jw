@@ -49,7 +49,7 @@ const WriteComment = () => {
           success("댓글이 등록되었습니다.");
         }
       } catch (error) {
-        if (error instanceof Error) alert(error.message);
+        if (error instanceof Error) errorMsg(error.message);
       }
     } else {
       if (!writer) {
