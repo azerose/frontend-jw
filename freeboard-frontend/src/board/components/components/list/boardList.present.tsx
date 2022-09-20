@@ -5,7 +5,13 @@ import { IListWriteUI } from "./boardList.type";
 const ListWriteUI = ({
   onClickMoveCreate,
   data,
+  lastPage,
+  startPage,
   onClickMoveDetail,
+  onClickNextPage,
+  onClickPrevPage,
+  onClickPage,
+  isChange,
 }: IListWriteUI) => {
   return (
     <S.Wrapper>
@@ -47,6 +53,28 @@ const ListWriteUI = ({
           </S.Row>
         ))}
       </S.ListWrapper>
+      <S.PageChagnerWrapper>
+        <S.PageChanger onClick={onClickPrevPage}>
+          <S.PrevImg src="/nextpage.png" />
+        </S.PageChanger>
+        {new Array(10).fill(1).map(
+          (_, index) =>
+            index + startPage <= lastPage && (
+              <S.Span
+                key={index + startPage}
+                id={String(index + startPage)}
+                onClick={onClickPage}
+                style={{ margin: "10px" }}
+                isChange={Number(isChange === index + startPage)}
+              >
+                {index + startPage}
+              </S.Span>
+            )
+        )}
+        <S.PageChanger onClick={onClickNextPage}>
+          <S.Nextimg src="/nextpage.png" />
+        </S.PageChanger>
+      </S.PageChagnerWrapper>
       <S.CreateBtnWrapper>
         <S.CreateBtn onClick={onClickMoveCreate}>게시글 작성하기</S.CreateBtn>
       </S.CreateBtnWrapper>

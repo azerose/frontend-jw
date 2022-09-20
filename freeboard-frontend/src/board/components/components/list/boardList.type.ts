@@ -5,4 +5,14 @@ export interface IListWriteUI {
   onClickMoveCreate: (event: MouseEvent<HTMLButtonElement>) => void;
   data?: Pick<IQuery, "fetchBoards">;
   onClickMoveDetail: (event: MouseEvent<HTMLDivElement>) => void;
+  onClickPrevPage: () => void;
+  onClickNextPage: () => void;
+  onClickPage: (event: MouseEvent<HTMLSpanElement>) => void;
+  startPage: number;
+  lastPage: number;
+  isChange: number;
+}
+
+export interface ISpan {
+  isChange: number;
 }

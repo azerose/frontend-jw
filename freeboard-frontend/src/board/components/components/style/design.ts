@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
+import { ISpan } from "../list/boardList.type";
 
 export const Header = styled.div`
   text-align: center;
@@ -357,3 +358,28 @@ export const ChangeBtn = styled.button`
 export const AddressModal = styled(Modal)``;
 
 export const AddressSearchInput = styled(DaumPostcode)``;
+
+export const Span = styled.span`
+  color: ${({ isChange }: ISpan) => (isChange ? "skyblue" : "default")};
+`;
+
+export const PageChanger = styled.button`
+  background: none;
+  border: none;
+`;
+
+export const PageChagnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+`;
+
+export const Nextimg = styled.img`
+  width: 14px;
+`;
+
+export const PrevImg = styled.img`
+  width: 14px;
+  transform: rotate(0.5turn);
+`;

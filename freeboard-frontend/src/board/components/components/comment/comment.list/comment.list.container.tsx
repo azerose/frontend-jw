@@ -114,7 +114,7 @@ const WatchCommentList = () => {
       }
     }
   };
-
+  console.log(udContents);
   return (
     <CommentListUI
       onChangeInputPassword={onChangeInputPassword}

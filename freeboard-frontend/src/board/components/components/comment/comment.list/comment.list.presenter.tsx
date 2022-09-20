@@ -59,6 +59,7 @@ const CommentListUI = ({
                     placeholder="작성자를 입력해 주세요"
                     name="writer"
                     onChange={onChangeWriter}
+                    defaultValue={String(el.writer)}
                   />
                   <St.PasswordInput
                     type="password"
@@ -75,6 +76,7 @@ const CommentListUI = ({
                   maxLength={500}
                   onChange={onChangeContents}
                   name="contents"
+                  defaultValue={el.contents}
                 ></St.Textarea>
                 <div>
                   <St.CommentCount>
