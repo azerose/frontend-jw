@@ -31,7 +31,7 @@ const ListWatch = () => {
       : 0;
 
   const onClickMoveDetail = (event: MouseEvent<HTMLDivElement>) => {
-    router.push(`/boards/board-detail/${(event.target as HTMLDivElement).id}`);
+    router.push(`/boards/board-detail/${event.currentTarget.id}`);
   };
 
   const onClickMoveCreate = () => {
@@ -45,12 +45,14 @@ const ListWatch = () => {
 
   const onClickPrevPage = () => {
     if (startPage === 1) return;
+    setIsChange(startPage - 10);
     setStartPage((prev) => prev - 10);
     void refetch({ page: startPage - 10 });
   };
 
   const onClickNextPage = () => {
     if (startPage + 10 <= lastPage) {
+      setIsChange(startPage + 10);
       setStartPage((prev) => prev + 10);
       void refetch({ page: startPage + 10 });
     }

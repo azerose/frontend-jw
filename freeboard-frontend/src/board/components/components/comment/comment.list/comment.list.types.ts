@@ -12,6 +12,7 @@ export interface ICommentListUI {
   onSaveCommentId: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickModalCancel: () => void;
   onChangeInputPassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeLoadmore: () => void;
   onUpdateComment: boolean;
   getSaveId: string;
   isOpen: boolean;

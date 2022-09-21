@@ -19,6 +19,16 @@ const WatchCommentList = () => {
     Pick<IMutation, "deleteBoardComment">,
     IMutationDeleteBoardCommentArgs
   >(DELETE_COMMENT);
+
+  const { data, fetchMore } = useQuery<
+    Pick<IQuery, "fetchBoardComments">,
+    IQueryFetchBoardCommentsArgs
+  >(FETCH_BOARD_COMMENTS, {
+    variables: {
+      boardId: String(router.query.id),
+    },
+  });
+
   const [updateBoardCommemt] = useMutation(UPDATE_BOARD_COMMENT);
 
   const [udWriter, setUdWriter] = useState("");
@@ -60,6 +70,30 @@ const WatchCommentList = () => {
     setDepassword(event.target.value);
   };
 
+  const onChangeLoadmore = () => {
+    if (data === undefined) return;
+    void fetchMore({
+      variables: {
+        page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
+        boardId: String(router.query.id),
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult.fetchBoardComments === undefined) {
+          return {
+            fetchBoardComments: [...prev.fetchBoardComments],
+          };
+        }
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+    console.log(data.fetchBoardComments);
+  };
+
   const commentEditOnchange = async (event: MouseEvent<HTMLButtonElement>) => {
     const updateCommentData: IUpdateCommentData = {
       password: udpassword,
@@ -81,15 +115,6 @@ const WatchCommentList = () => {
       ],
     });
   };
-
-  const { data } = useQuery<
-    Pick<IQuery, "fetchBoardComments">,
-    IQueryFetchBoardCommentsArgs
-  >(FETCH_BOARD_COMMENTS, {
-    variables: {
-      boardId: String(router.query.id),
-    },
-  });
 
   const onClickDeleteComment = async (event: MouseEvent<HTMLElement>) => {
     try {
@@ -114,7 +139,7 @@ const WatchCommentList = () => {
       }
     }
   };
-  console.log(udContents);
+
   return (
     <CommentListUI
       onChangeInputPassword={onChangeInputPassword}
@@ -130,6 +155,7 @@ const WatchCommentList = () => {
       getSaveId={getSaveId}
       onSaveCommentId={onSaveCommentId}
       isOpen={isOpen}
+      onChangeLoadmore={onChangeLoadmore}
     />
   );
 };

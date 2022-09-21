@@ -361,11 +361,13 @@ export const AddressSearchInput = styled(DaumPostcode)``;
 
 export const Span = styled.span`
   color: ${({ isChange }: ISpan) => (isChange ? "skyblue" : "default")};
+  cursor: pointer;
 `;
 
 export const PageChanger = styled.button`
   background: none;
   border: none;
+  cursor: pointer;
 `;
 
 export const PageChagnerWrapper = styled.div`

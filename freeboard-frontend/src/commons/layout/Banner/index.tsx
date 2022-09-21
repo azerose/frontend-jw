@@ -10,7 +10,7 @@ const LayoutBanner = () => {
     infinite: true,
     centerPadding: "60px",
     slidesToShow: 3,
-    speed: 500,
+    speed: 600,
     arrow: true,
     autoplay: true,
   };
@@ -26,6 +26,7 @@ const LayoutBanner = () => {
     margin: 0 auto;
     img {
       width: 100%;
+      height: 200px;
     }
     .slick-prev {
       left: 25px;

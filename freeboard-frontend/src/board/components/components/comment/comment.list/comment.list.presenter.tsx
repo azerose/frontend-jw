@@ -2,6 +2,7 @@ import { getDate } from "../../../../commons/utils/utils";
 import * as St from "../../detail/boardDetail.styles";
 import { Rate } from "antd";
 import { ICommentListUI } from "./comment.list.types";
+import InfiniteScroll from "react-infinite-scroller";
 
 const CommentListUI = ({
   data,
@@ -17,6 +18,7 @@ const CommentListUI = ({
   getSaveId,
   isOpen,
   onChangeInputPassword,
+  onChangeLoadmore,
 }: ICommentListUI) => {
   return (
     <>
@@ -27,7 +29,7 @@ const CommentListUI = ({
           onCancel={onClickModalCancel}
         >
           <div>비밀번호를 입력해 주세요!!</div>
-          <St.InputPassword onChange={onChangeInputPassword} />
+          <St.InputPassword type="password" onChange={onChangeInputPassword} />
         </St.PasswordModal>
       )}
       <St.CommentWatchBox>
@@ -51,42 +53,48 @@ const CommentListUI = ({
               <St.CommentContents>내용 :{el.contents}</St.CommentContents>
               <St.CommentDate>날짜: {getDate(el.createdAt)}</St.CommentDate>
             </St.CommentRow>
-            {onUpdateComment && getSaveId === el._id ? (
-              <St.Commentbox>
-                <St.Comment>댓글</St.Comment>
-                <div>
-                  <St.WriterInput
-                    placeholder="작성자를 입력해 주세요"
-                    name="writer"
-                    onChange={onChangeWriter}
-                    defaultValue={String(el.writer)}
-                  />
-                  <St.PasswordInput
-                    type="password"
-                    placeholder="비밀번호"
-                    name="password"
-                    onChange={onChangePassword}
-                  />
-                </div>
-                <div>
-                  <Rate />
-                </div>
-                <St.Textarea
-                  placeholder="개인정보 쏼라쏼라"
-                  maxLength={500}
-                  onChange={onChangeContents}
-                  name="contents"
-                  defaultValue={el.contents}
-                ></St.Textarea>
-                <div>
-                  <St.CommentCount>
-                    <St.CommentEnroll onClick={commentEditOnchange}>
-                      수정하기
-                    </St.CommentEnroll>
-                  </St.CommentCount>
-                </div>
-              </St.Commentbox>
-            ) : null}
+            <InfiniteScroll
+              pageStart={0}
+              loadMore={onChangeLoadmore}
+              hasMore={true || false}
+            >
+              {onUpdateComment && getSaveId === el._id ? (
+                <St.Commentbox>
+                  <St.Comment>댓글</St.Comment>
+                  <div>
+                    <St.WriterInput
+                      placeholder="작성자를 입력해 주세요"
+                      name="writer"
+                      onChange={onChangeWriter}
+                      defaultValue={String(el.writer)}
+                    />
+                    <St.PasswordInput
+                      type="password"
+                      placeholder="비밀번호"
+                      name="password"
+                      onChange={onChangePassword}
+                    />
+                  </div>
+                  <div>
+                    <Rate />
+                  </div>
+                  <St.Textarea
+                    placeholder="개인정보 쏼라쏼라"
+                    maxLength={500}
+                    onChange={onChangeContents}
+                    name="contents"
+                    defaultValue={el.contents}
+                  ></St.Textarea>
+                  <div>
+                    <St.CommentCount>
+                      <St.CommentEnroll onClick={commentEditOnchange}>
+                        수정하기
+                      </St.CommentEnroll>
+                    </St.CommentCount>
+                  </div>
+                </St.Commentbox>
+              ) : null}
+            </InfiniteScroll>
           </>
         ))}
       </St.CommentWatchBox>

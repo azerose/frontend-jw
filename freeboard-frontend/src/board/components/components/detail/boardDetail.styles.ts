@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Modal } from "antd";
+import InfiniteScroll from "react-infinite-scroller";
 
 export const Commentbox = styled.div`
   border-top: 1px solid #bdbdbd;
