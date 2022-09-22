@@ -1,4 +1,3 @@
-import { FETCH_BOARD_COMMENTS } from "../../detail/boardDetail.query";
 import CommentListUI from "./comment.list.presenter";
 import {
   IMutation,
@@ -10,30 +9,23 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { DELETE_COMMENT, UPDATE_BOARD_COMMENT } from "./comment.list.Queries";
-import { IUpdateCommentData } from "./comment.list.types";
+import { IUpdateCommentData, IWatchCommentList } from "./comment.list.types";
 import { errorMsg } from "../../../../../commons/modal/modalFun";
+import { FETCH_BOARD_COMMENTS } from "../../detail/boardDetail.query";
 
-const WatchCommentList = () => {
+const WatchCommentList = ({ el, fetchMore, data }: IWatchCommentList) => {
   const router = useRouter();
   const [deleteBoardComment] = useMutation<
     Pick<IMutation, "deleteBoardComment">,
     IMutationDeleteBoardCommentArgs
   >(DELETE_COMMENT);
 
-  const { data, fetchMore } = useQuery<
-    Pick<IQuery, "fetchBoardComments">,
-    IQueryFetchBoardCommentsArgs
-  >(FETCH_BOARD_COMMENTS, {
-    variables: {
-      boardId: String(router.query.id),
-    },
-  });
-
   const [updateBoardCommemt] = useMutation(UPDATE_BOARD_COMMENT);
 
   const [udWriter, setUdWriter] = useState("");
   const [udpassword, setPassword] = useState("");
   const [udContents, setContents] = useState("");
+
   const [onUpdateComment, setOnUpdateComment] = useState(false);
   const [getSaveId, setGetSaveId] = useState("");
   const [rating, setRating] = useState(0);
@@ -77,7 +69,7 @@ const WatchCommentList = () => {
         page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
         boardId: String(router.query.id),
       },
-      updateQuery: (prev, { fetchMoreResult }) => {
+      updateQuery: (prev: any, { fetchMoreResult }: any) => {
         if (fetchMoreResult.fetchBoardComments === undefined) {
           return {
             fetchBoardComments: [...prev.fetchBoardComments],
@@ -91,7 +83,6 @@ const WatchCommentList = () => {
         };
       },
     });
-    console.log(data.fetchBoardComments);
   };
 
   const commentEditOnchange = async (event: MouseEvent<HTMLButtonElement>) => {
@@ -141,23 +132,24 @@ const WatchCommentList = () => {
   };
 
   return (
-    <CommentListUI
-      onChangeInputPassword={onChangeInputPassword}
-      onClickModalCancel={onClickModalCancel}
-      data={data}
-      onChangeWriter={onChangeWriter}
-      onChangePassword={onChangePassword}
-      onChangeContents={onChangeContents}
-      onClickDeleteComment={onClickDeleteComment}
-      commentEditOnchange={commentEditOnchange}
-      onUpdateComment={onUpdateComment}
-      onShowComment={onShowComment}
-      getSaveId={getSaveId}
-      onSaveCommentId={onSaveCommentId}
-      isOpen={isOpen}
-      onChangeLoadmore={onChangeLoadmore}
-    />
+    <>
+      <CommentListUI
+        onChangeInputPassword={onChangeInputPassword}
+        onClickModalCancel={onClickModalCancel}
+        onChangeWriter={onChangeWriter}
+        onChangePassword={onChangePassword}
+        onChangeContents={onChangeContents}
+        onClickDeleteComment={onClickDeleteComment}
+        commentEditOnchange={commentEditOnchange}
+        onUpdateComment={onUpdateComment}
+        onShowComment={onShowComment}
+        getSaveId={getSaveId}
+        onSaveCommentId={onSaveCommentId}
+        isOpen={isOpen}
+        onChangeLoadmore={onChangeLoadmore}
+        el={el}
+      />
+    </>
   );
 };
-
 export default WatchCommentList;

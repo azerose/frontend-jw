@@ -1,5 +1,18 @@
+import { Maybe } from "graphql/jsutils/Maybe";
 import { ChangeEvent, MouseEvent } from "react";
-import { IQuery } from "../../../../../commons/types/generated/types";
+import {
+  IBoardComment,
+  IQuery,
+  IQueryFetchBoardCommentsArgs,
+} from "../../../../../commons/types/generated/types";
+
+export interface IEl {
+  _id: string;
+  writer?: Maybe<string> | undefined;
+  rating: number;
+  contents: string;
+  createdAt: Date;
+}
 
 export interface ICommentListUI {
   data?: Pick<IQuery, "fetchBoardComments">;
@@ -16,6 +29,7 @@ export interface ICommentListUI {
   onUpdateComment: boolean;
   getSaveId: string;
   isOpen: boolean;
+  el: IEl;
 }
 
 export interface IUpdateBoardCommentInput {
@@ -27,4 +41,10 @@ export interface IUpdateCommentData {
   password: string;
   boardCommentId: string;
   updateBoardCommentInput: IUpdateBoardCommentInput;
+}
+
+export interface IWatchCommentList {
+  el: IBoardComment;
+  fetchMore: any;
+  data?: Pick<IQuery, "fetchBoardComments">;
 }

@@ -20,3 +20,19 @@ export const SearchInput = styled.input`
   outline-width: 0px;
   margin: 0 15px;
 `;
+
+export const SellImg = styled.img`
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  cursor: pointer;
+`;
+
+export const DivWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const SellDiv = styled.div`
+  cursor: pointer;
+`;
