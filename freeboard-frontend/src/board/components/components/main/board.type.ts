@@ -26,6 +26,7 @@ export interface IBoardWriteUI {
   onClickSignUp: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickAddressSearch: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickHandleCancel: () => void;
   onCompleteAddressSearch: (data: any) => void;
   ner: string;
   per: string;

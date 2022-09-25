@@ -5,7 +5,7 @@ const LayoutHeader = () => {
   const router = useRouter();
 
   const onClickHome = () => {
-    router.push("/boards");
+    router.push("/");
   };
 
   const onClickBoards = () => {

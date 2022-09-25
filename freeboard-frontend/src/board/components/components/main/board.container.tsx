@@ -141,11 +141,15 @@ const Board = (props: IBoardProps) => {
   };
 
   const onClickAddressSearch = () => {
-    setIsOpen(true);
+    setIsOpen((prev) => !prev);
   };
 
   const onCompleteAddressSearch = (data: any) => {
     setInput({ ...input, addo: data.address, add: data.zonecode });
+    setIsOpen((prev) => !prev);
+  };
+
+  const onClickHandleCancel = () => {
     setIsOpen(false);
   };
 
@@ -177,30 +181,6 @@ const Board = (props: IBoardProps) => {
   };
 
   const onClickSignUp = async (event: MouseEvent<HTMLButtonElement>) => {
-    try {
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: input.name,
-            password: input.ps,
-            title: input.title,
-            contents: input.main,
-            youtubeUrl: input.lk,
-            boardAddress: {
-              zipcode: input.add,
-              address: input.addo,
-              addressDetail: input.addt,
-            },
-            images: [],
-          },
-        },
-      });
-      // alert(result.data.createBoard.message);
-      console.log(result?.data?.createBoard._id);
-      router.push(`/boards/board-detail/${result?.data?.createBoard._id}`);
-    } catch (error) {
-      if (error instanceof Error) errorMsg(error.message);
-    }
     if (!input.name) {
       setNer("이름을 적어주세요.");
     }
@@ -220,6 +200,7 @@ const Board = (props: IBoardProps) => {
     if (!input.lk) {
       setLer("링크를 입력해 주세요.");
     }
+
     if (
       input.name &&
       input.ps &&
@@ -230,7 +211,31 @@ const Board = (props: IBoardProps) => {
       input.addt &&
       input.lk
     ) {
-      success("게시들이 등록되었습니다.");
+      try {
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer: input.name,
+              password: input.ps,
+              title: input.title,
+              contents: input.main,
+              youtubeUrl: input.lk,
+              boardAddress: {
+                zipcode: input.add,
+                address: input.addo,
+                addressDetail: input.addt,
+              },
+              images: [],
+            },
+          },
+        });
+        // alert(result.data.createBoard.message);
+        success("게시글 등록에 성공하였습니다");
+        console.log(result?.data?.createBoard._id);
+        router.push(`/boards/board-detail/${result?.data?.createBoard._id}`);
+      } catch (error) {
+        if (error instanceof Error) errorMsg(error.message);
+      }
     }
   };
 
@@ -246,6 +251,7 @@ const Board = (props: IBoardProps) => {
       onClickUpdate={onClickUpdate}
       onClickAddressSearch={onClickAddressSearch}
       onCompleteAddressSearch={onCompleteAddressSearch}
+      onClickHandleCancel={onClickHandleCancel}
       add={input.add}
       addo={input.addo}
       ner={ner}

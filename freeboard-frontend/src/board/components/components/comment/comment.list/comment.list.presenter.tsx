@@ -20,7 +20,6 @@ const CommentListUI = ({
   onChangeLoadmore,
   el,
 }: ICommentListUI) => {
-  console.log(el);
   return (
     <>
       {isOpen && (

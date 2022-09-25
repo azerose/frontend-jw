@@ -12,6 +12,7 @@ const BoardWriteUI = ({
   onClickUpdate,
   onClickAddressSearch,
   onCompleteAddressSearch,
+  onClickHandleCancel,
   ner,
   per,
   ter,
@@ -29,7 +30,7 @@ const BoardWriteUI = ({
   return (
     <>
       {isOpen && (
-        <S.AddressModal visible={true}>
+        <S.AddressModal visible={true} onCancel={onClickHandleCancel}>
           <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
         </S.AddressModal>
       )}
