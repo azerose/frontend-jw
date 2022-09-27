@@ -2,8 +2,6 @@ import CommentListUI from "./comment.list.presenter";
 import {
   IMutation,
   IMutationDeleteBoardCommentArgs,
-  IQuery,
-  IQueryFetchBoardCommentsArgs,
 } from "../../../../../commons/types/generated/types";
 import { useQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -60,29 +58,6 @@ const WatchCommentList = ({ el, fetchMore, data }: IWatchCommentList) => {
 
   const onChangeInputPassword = (event: ChangeEvent<HTMLInputElement>) => {
     setDepassword(event.target.value);
-  };
-
-  const onChangeLoadmore = () => {
-    if (data === undefined) return;
-    void fetchMore({
-      variables: {
-        page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
-        boardId: String(router.query.id),
-      },
-      updateQuery: (prev: any, { fetchMoreResult }: any) => {
-        if (fetchMoreResult.fetchBoardComments === undefined) {
-          return {
-            fetchBoardComments: [...prev.fetchBoardComments],
-          };
-        }
-        return {
-          fetchBoardComments: [
-            ...prev.fetchBoardComments,
-            ...fetchMoreResult.fetchBoardComments,
-          ],
-        };
-      },
-    });
   };
 
   const commentEditOnchange = async (event: MouseEvent<HTMLButtonElement>) => {
@@ -146,7 +121,6 @@ const WatchCommentList = ({ el, fetchMore, data }: IWatchCommentList) => {
         getSaveId={getSaveId}
         onSaveCommentId={onSaveCommentId}
         isOpen={isOpen}
-        onChangeLoadmore={onChangeLoadmore}
         el={el}
       />
     </>

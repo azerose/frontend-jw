@@ -385,3 +385,7 @@ export const PrevImg = styled.img`
   width: 14px;
   transform: rotate(0.5turn);
 `;
+
+export const ImageLink = styled.input`
+  display: none;
+`;

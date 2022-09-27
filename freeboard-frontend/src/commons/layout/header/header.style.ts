@@ -36,3 +36,22 @@ export const DivWrapper = styled.div`
 export const SellDiv = styled.div`
   cursor: pointer;
 `;
+
+export const SellerCenterDiv = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  width: 1200px;
+  align-items: center;
+`;
+
+export const SellerCenter = styled.div`
+  font-size: 14px;
+  font-weight: bold;
+`;
+
+export const CategoryImg = styled.svg`
+cursor: pointer;
+  &:hover g {
+    fill: red;
+  }
+`;

@@ -1,19 +1,23 @@
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useRef, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router.js";
 import { CREATE_BOARD } from "../detail/boardDetail.query";
 import BoardWriteUI from "./board.present";
-import { UPDATE_BOARD } from "./board.queries";
+import { UPDATE_BOARD, UPLOAD_FILE } from "./board.queries";
 import { IBoardProps, IUpdateBoardInput } from "./board.type";
 import {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
+  IMutationUploadFileArgs,
 } from "../../../../commons/types/generated/types";
 import { errorMsg, success } from "../../../../commons/modal/modalFun";
+import { checkValidationFile } from "../../../commons/validation/validationFile";
+import { Modal } from "antd";
 
 const Board = (props: IBoardProps) => {
   const router = useRouter();
+  const fileRef = useRef<HTMLInputElement>(null);
   const [change, setChange] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,7 +27,12 @@ const Board = (props: IBoardProps) => {
   const [mer, setMer] = useState("");
   const [ater, setAter] = useState("");
   const [ler, setLer] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
 
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
     IMutationCreateBoardArgs
@@ -153,6 +162,10 @@ const Board = (props: IBoardProps) => {
     setIsOpen(false);
   };
 
+  const onClickImage = () => {
+    fileRef.current?.click();
+  };
+
   const onClickUpdate = async () => {
     const updateBoardData: IUpdateBoardInput = {
       password: input.ps,
@@ -165,13 +178,6 @@ const Board = (props: IBoardProps) => {
       const updateBoardResult = await upadateBoard({
         variables: updateBoardData,
       });
-      // const upload = await upadateBoard({
-      //   variables: {
-      //     updateBoardInput: updateBoardInput,
-      //     password: input.ps,
-      //     boardId: String(router.query.id),
-      //   },
-      // });
       router.push(
         `/boards/board-detail/${updateBoardResult?.data?.updateBoard._id}`
       );
@@ -225,7 +231,7 @@ const Board = (props: IBoardProps) => {
                 address: input.addo,
                 addressDetail: input.addt,
               },
-              images: [],
+              images: [imgUrl],
             },
           },
         });
@@ -236,6 +242,20 @@ const Board = (props: IBoardProps) => {
       } catch (error) {
         if (error instanceof Error) errorMsg(error.message);
       }
+    }
+  };
+
+  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
+
+    try {
+      const result = await uploadFile({ variables: { file } });
+      setImgUrl(result.data?.uploadFile.url ?? "");
+      console.log(result);
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
 
@@ -264,6 +284,9 @@ const Board = (props: IBoardProps) => {
       isEdit={props.isEdit}
       data={props.data}
       isOpen={isOpen}
+      onClickImage={onClickImage}
+      onChangeFile={onChangeFile}
+      fileRef={fileRef}
     />
   );
 };

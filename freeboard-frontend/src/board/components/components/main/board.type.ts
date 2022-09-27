@@ -28,6 +28,8 @@ export interface IBoardWriteUI {
   onClickAddressSearch: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickHandleCancel: () => void;
   onCompleteAddressSearch: (data: any) => void;
+  onClickImage: (event: MouseEvent<HTMLButtonElement>) => void;
+  onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
   ner: string;
   per: string;
   ter: string;
@@ -40,4 +42,5 @@ export interface IBoardWriteUI {
   isOpen: boolean;
   add: string;
   addo: string;
+  fileRef: any;
 }

@@ -35,7 +35,10 @@ const BoardDetailWriteUI = ({
         </S.Profile>
         <S.Main>
           <S.Title>{data ? data.fetchBoard.title : "로딩중입니다.."}</S.Title>
-          <img src="/image.png" />
+          <img
+            src={`https://storage.googleapis.com/${data?.fetchBoard.images}`}
+          />
+
           <S.Content>
             {data ? data.fetchBoard.contents : "로딩중입니당..."}
           </S.Content>

@@ -11,7 +11,6 @@ import {
   IQuery,
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
-import { MouseEvent } from "react";
 import { errorMsg } from "../../../../commons/modal/modalFun";
 
 const DetailPage = () => {
