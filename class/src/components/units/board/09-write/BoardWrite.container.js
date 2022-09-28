@@ -20,9 +20,9 @@ export default function BoardWrite(props) {
     const result = await 나의함수({
       variables: {
         // variables 이게 $ 역할을 해줌
-        writer: writer, // 이 함수에 없으면 스코프 체인을 통해서 위 함수에서 찾음
-        title: title,
-        contents: contents,
+        writer, // 이 함수에 없으면 스코프 체인을 통해서 위 함수에서 찾음
+        title,
+        contents,
       },
     });
     console.log(result);
@@ -37,13 +37,13 @@ export default function BoardWrite(props) {
     if (writer) myvariables.writer = writer;
     if (title) myvariables.title = title;
     if (contents) myvariables.contents = contents;
-    //1.수정하기 뮤테이션 날리기
+    // 1.수정하기 뮤테이션 날리기
     const result = await updateBoard({
       variables: myvariables,
     });
     console.log(result);
     alert(result.data.updateBoard.message);
-    router.push(`/09-01-boards/${result.data.updateBoard.number}`); //2.상세페이지로 이동하기
+    router.push(`/09-01-boards/${result.data.updateBoard.number}`); // 2.상세페이지로 이동하기
     // router.push(".....")
   };
 

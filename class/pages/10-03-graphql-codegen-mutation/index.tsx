@@ -24,7 +24,7 @@ const GraphqlMutationPage = () => {
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
     IMutationCreateBoardArgs
-  >(CREATE_BOARD); //<RESULT타입,VARIABLES타입>
+  >(CREATE_BOARD); // <RESULT타입,VARIABLES타입>
 
   const onClickSubmit = async () => {
     const result = await createBoard({

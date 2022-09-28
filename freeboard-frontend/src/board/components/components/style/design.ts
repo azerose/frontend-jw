@@ -234,6 +234,7 @@ export const Triangle = styled.div``;
 export const ListHeader = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
 `;
 
 export const BestPost = styled.div`
@@ -302,7 +303,6 @@ export const ListTitle = styled.div`
     white-space: nowrap;
     line-height: 40px;
   }
-  margin-top: 50px;
 `;
 
 export const ListWrapper = styled.div`

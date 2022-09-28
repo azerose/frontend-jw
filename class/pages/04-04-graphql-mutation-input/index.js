@@ -22,7 +22,7 @@ const GraphqlMutationPage = () => {
   const onClickSubmit = async () => {
     const result = await createBoard({
       variables: {
-        //variables가 $역할을 수행함
+        // variables가 $역할을 수행함
         writer: writer,
         title: title,
         contents: contents,

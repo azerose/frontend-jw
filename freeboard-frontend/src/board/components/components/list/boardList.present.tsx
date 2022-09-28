@@ -1,6 +1,8 @@
 import { getDate } from "../../../commons/utils/utils";
 import * as S from "../style/design";
+import * as St from "../list/board.List.style";
 import { IListWriteUI } from "./boardList.type";
+import moment from "moment";
 
 const ListWriteUI = ({
   onClickMoveCreate,
@@ -12,6 +14,11 @@ const ListWriteUI = ({
   onClickPrevPage,
   onClickPage,
   isChange,
+  RangePicker,
+  dateFormat,
+  onClickSearch,
+  onChangeSearch,
+  dataBoardsCount,
 }: IListWriteUI) => {
   return (
     <S.Wrapper>
@@ -25,6 +32,23 @@ const ListWriteUI = ({
           </S.BestPostContents>
         </S.BestPost>
       </S.ListHeader>
+      <St.SearchWrapper>
+        <St.SearchBox>
+          <St.SearchImg src="/search.png/" />
+          <St.SearchInput
+            type="text"
+            placeholder="제목을 입력해주세요"
+            onChange={onChangeSearch}
+          />
+        </St.SearchBox>
+        <RangePicker
+          defaultValue={[
+            moment("2022-09-03", dateFormat),
+            moment("2022-11-22", dateFormat),
+          ]}
+        />
+        <St.SearchBtn onClick={onClickSearch}>검색하기</St.SearchBtn>
+      </St.SearchWrapper>
       <S.ListTitle>
         <div>순서</div>
         <div>제목</div>

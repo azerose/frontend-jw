@@ -2,25 +2,30 @@ import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { FETCH_BOARDS } from "../detail/boardDetail.query";
 import ListWriteUI from "./boardList.present";
-import { MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import {
   IQuery,
   IQueryFetchBoardsArgs,
   IQueryFetchBoardsCountArgs,
 } from "../../../../commons/types/generated/types";
 import { FETCH_BOARDS_COUNT } from "./board.list.query";
+import { DatePicker } from "antd";
 
 const ListWatch = () => {
   const router = useRouter();
   const [startPage, setStartPage] = useState(1);
   const [isChange, setIsChange] = useState(1); //현재 페이지의 아이디를 담아두는 곳
+  const [search, setSearch] = useState("");
+  const [searchPage, setSearchPage] = useState(0);
 
+  const { RangePicker } = DatePicker;
+  const dateFormat = "YYYY-MM-DD";
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
 
-  const { data: dataBoardsCount } = useQuery<
+  const { data: dataBoardsCount, refetch: refetchCount } = useQuery<
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT);
@@ -58,6 +63,16 @@ const ListWatch = () => {
     }
   };
 
+  const onChangeSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const onClickSearch = () => {
+    const result = void refetch({ search, page: 1 });
+    void refetchCount({ search });
+  };
+  console.log(dataBoardsCount);
+
   return (
     <ListWriteUI
       onClickMoveCreate={onClickMoveCreate}
@@ -69,6 +84,10 @@ const ListWatch = () => {
       lastPage={lastPage}
       onClickPage={onClickPage}
       isChange={isChange}
+      RangePicker={RangePicker}
+      dateFormat={dateFormat}
+      onClickSearch={onClickSearch}
+      onChangeSearch={onChangeSearch}
     />
   );
 };
