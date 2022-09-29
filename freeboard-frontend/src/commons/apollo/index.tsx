@@ -10,13 +10,15 @@ interface IApolloSetting {
   children: JSX.Element;
 }
 
+const GLOBAL_STATE = new InMemoryCache();
+
 const ApolloSetting = (props: IApolloSetting) => {
   const uploadLink = createUploadLink({
     uri: "http://backend09.codebootcamp.co.kr/graphql",
   });
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink]),
-    cache: new InMemoryCache(),
+    cache: GLOBAL_STATE,
   });
 
   // prettier-ignore

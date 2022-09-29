@@ -47,11 +47,17 @@ export const SellerCenterDiv = styled.div`
 export const SellerCenter = styled.div`
   font-size: 14px;
   font-weight: bold;
+  margin: 10px;
 `;
 
 export const CategoryImg = styled.svg`
-cursor: pointer;
+  cursor: pointer;
   &:hover g {
     fill: red;
   }
+`;
+
+export const ImgDiv = styled.div`
+  display: flex;
+  align-items: center;
 `;

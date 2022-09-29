@@ -36,35 +36,37 @@ const LayoutHeader = () => {
         </S.DivWrapper>
       </S.HeaderWrapper>
       <S.SellerCenterDiv>
-        <S.CategoryImg
-          version="1.0"
-          xmlns="http://www.w3.org/2000/svg"
-          width="23"
-          height="23"
-          viewBox="0 0 40 40"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <g
-            transform="translate(0.000000,33.000000) scale(0.100000,-0.100000)"
-            fill="#000000"
-            stroke="none"
+        <S.ImgDiv>
+          <S.CategoryImg
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            width="23"
+            height="23"
+            viewBox="0 0 40 40"
+            preserveAspectRatio="xMidYMid meet"
           >
-            <path
-              d="M0 300 c0 -19 7 -20 200 -20 193 0 200 1 200 20 0 19 -7 20 -200 20
+            <g
+              transform="translate(0.000000,33.000000) scale(0.100000,-0.100000)"
+              fill="#000000"
+              stroke="none"
+            >
+              <path
+                d="M0 300 c0 -19 7 -20 200 -20 193 0 200 1 200 20 0 19 -7 20 -200 20
 -193 0 -200 -1 -200 -20z"
-            />
-            <path
-              d="M0 160 c0 -19 7 -20 200 -20 193 0 200 1 200 20 0 19 -7 20 -200 20
+              />
+              <path
+                d="M0 160 c0 -19 7 -20 200 -20 193 0 200 1 200 20 0 19 -7 20 -200 20
 -193 0 -200 -1 -200 -20z"
-            />
-            <path
-              d="M0 20 c0 -19 7 -20 200 -20 193 0 200 1 200 20 0 19 -7 20 -200 20
+              />
+              <path
+                d="M0 20 c0 -19 7 -20 200 -20 193 0 200 1 200 20 0 19 -7 20 -200 20
 -193 0 -200 -1 -200 -20z"
-            />
-          </g>
-        </S.CategoryImg>
+              />
+            </g>
+          </S.CategoryImg>
 
-        <S.SellerCenter>번개장터 판매자 센터</S.SellerCenter>
+          <S.SellerCenter>번개장터 판매자 센터</S.SellerCenter>
+        </S.ImgDiv>
       </S.SellerCenterDiv>
     </>
   );

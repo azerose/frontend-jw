@@ -18,7 +18,7 @@ const ListWriteUI = ({
   dateFormat,
   onClickSearch,
   onChangeSearch,
-  dataBoardsCount,
+
 }: IListWriteUI) => {
   return (
     <S.Wrapper>
