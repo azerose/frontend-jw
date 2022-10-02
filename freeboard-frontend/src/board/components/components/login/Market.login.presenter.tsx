@@ -1,43 +1,51 @@
 import { CheckCircleOutlined } from "@ant-design/icons";
 import * as S from "./Market.login.design";
+import { IMarketLogin } from "./Marketlogin.type";
 
-const MarketLoginUI = () => {
+const MarketLoginUI = ({
+  onChangeEmail,
+  onChangePassword,
+  onClickLogin,
+  onClickMoveSignUp,
+}: IMarketLogin) => {
   return (
     <>
-      <header>
+      <S.HeaderWrapper>
         <img src="/thundertrade.svg" />
-      </header>
-      <main>
-        <section>
-          <label>Login</label>
-        </section>
-        <section>
-          <img src="/id.png/" />
-          <input type="text" />
-        </section>
-        <section>
-          <img src="/password.png/" />
-          <input type="password" />
-        </section>
+      </S.HeaderWrapper>
+      <S.MainWrapper>
+        <S.LoginHeader>
+          <S.LoginLabel>Login</S.LoginLabel>
+        </S.LoginHeader>
+        <div>
+          <S.EmailSection>
+            <S.EmailImg src="/id.png/" />
+            <S.EmailInput type="text" onChange={onChangeEmail} />
+          </S.EmailSection>
+          <S.PassWordSection>
+            <S.EmailImg src="/password.png/" />
+            <S.EmailInput type="password" onChange={onChangePassword} />
+          </S.PassWordSection>
+        </div>
         <S.KeepLoginSection>
           <S.KeepLoginBtn>
             <CheckCircleOutlined />
           </S.KeepLoginBtn>
           <section>로그인 상태 유지</section>
         </S.KeepLoginSection>
-        <section>
-          <button>로그인</button>
-        </section>
-      </main>
-      <footer>
+        <S.LoginBtnSection>
+          <S.LoginBtn onClick={onClickLogin}>로그인</S.LoginBtn>
+        </S.LoginBtnSection>
+      </S.MainWrapper>
+      <S.Footer>
         <S.FooterSection>
-          <section>비밀번호 찾기</section>
+          <S.FinddSection>비밀번호 찾기</S.FinddSection>
           <span>|</span>
-          <section>아이디 찾기</section>
+          <S.FinddSection>아이디 찾기</S.FinddSection>
           <span>|</span>
-          <section>회원가입</section>
+          <S.FinddSection onClick={onClickMoveSignUp}>회원가입</S.FinddSection>
         </S.FooterSection>
-      </footer>
+      </S.Footer>
     </>
   );
 };

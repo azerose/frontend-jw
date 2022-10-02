@@ -1,10 +1,28 @@
+import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { accessTokenState, isTokenState } from "../../store";
+import { IQuery } from "../../types/generated/types";
 import * as S from "../header/header.style";
 
+const FETCH_USER_LOGGED_IN = gql`
+  query fetchUserLoggedIn {
+    fetchUserLoggedIn {
+      _id
+      email
+      name
+    }
+  }
+`;
+
 const LayoutHeader = () => {
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const [change, setChange] = useState(false);
   const router = useRouter();
+
+  const { data } =
+    useQuery<Pick<IQuery, "fetchUserLoggedIn">>(FETCH_USER_LOGGED_IN);
 
   const onClickHome = () => {
     router.push("/");
@@ -14,6 +32,11 @@ const LayoutHeader = () => {
     router.push("/boards");
   };
 
+  const onClickMarket = () => {
+    router.push("/Market/login");
+  };
+
+  console.log(data);
   return (
     <>
       <S.HeaderWrapper>
@@ -23,12 +46,15 @@ const LayoutHeader = () => {
           <img src="/search.png/" />
         </S.SearchWrapper>
         <S.DivWrapper>
+          {accessToken ? `${data?.fetchUserLoggedIn.name}님 환영합니다.` : ""}
+        </S.DivWrapper>
+        <S.DivWrapper>
           <S.SellImg src="/sell.png/" onClick={onClickHome} />
           <S.SellDiv>판매하기</S.SellDiv>
         </S.DivWrapper>
         <S.DivWrapper>
           <S.SellImg src="/login.png/" />
-          <S.SellDiv>내상점</S.SellDiv>
+          <S.SellDiv onClick={onClickMarket}>내상점</S.SellDiv>
         </S.DivWrapper>
         <S.DivWrapper>
           <S.SellImg onClick={onClickBoards} src="/boards.png/" />
