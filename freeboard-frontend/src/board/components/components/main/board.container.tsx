@@ -17,7 +17,6 @@ import { Modal } from "antd";
 
 const Board = (props: IBoardProps) => {
   const router = useRouter();
-  const fileRef = useRef<HTMLInputElement>(null);
   const [change, setChange] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,7 +26,7 @@ const Board = (props: IBoardProps) => {
   const [mer, setMer] = useState("");
   const [ater, setAter] = useState("");
   const [ler, setLer] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState(["", "", ""]);
 
   const [uploadFile] = useMutation<
     Pick<IMutation, "uploadFile">,
@@ -162,10 +161,6 @@ const Board = (props: IBoardProps) => {
     setIsOpen(false);
   };
 
-  const onClickImage = () => {
-    fileRef.current?.click();
-  };
-
   const onClickUpdate = async () => {
     const updateBoardData: IUpdateBoardInput = {
       password: input.ps,
@@ -231,7 +226,7 @@ const Board = (props: IBoardProps) => {
                 address: input.addo,
                 addressDetail: input.addt,
               },
-              images: [imgUrl],
+              images: imgUrl,
             },
           },
         });
@@ -245,19 +240,26 @@ const Board = (props: IBoardProps) => {
     }
   };
 
-  const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    const isValid = checkValidationFile(file);
-    if (!isValid) return;
+  const onChangeFile =
+    (index: number) => async (event: ChangeEvent<HTMLInputElement>) => {
+      console.log(event.currentTarget.className[0]);
+      console.log(imgUrl);
+      const file = event.target.files?.[0];
+      const isValid = checkValidationFile(file);
+      if (!isValid) return;
 
-    try {
-      const result = await uploadFile({ variables: { file } });
-      setImgUrl(result.data?.uploadFile.url ?? "");
-      console.log(result);
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
-    }
-  };
+      try {
+        const result = await uploadFile({ variables: { file } });
+        let newImgUrls = [...imgUrl];
+        newImgUrls[index] = result.data?.uploadFile.url;
+        setImgUrl(newImgUrls);
+        console.log(result);
+      } catch (error) {
+        if (error instanceof Error) Modal.error({ content: error.message });
+      }
+    };
+
+  console.log(imgUrl);
 
   return (
     <BoardWriteUI
@@ -284,9 +286,7 @@ const Board = (props: IBoardProps) => {
       isEdit={props.isEdit}
       data={props.data}
       isOpen={isOpen}
-      onClickImage={onClickImage}
       onChangeFile={onChangeFile}
-      fileRef={fileRef}
     />
   );
 };

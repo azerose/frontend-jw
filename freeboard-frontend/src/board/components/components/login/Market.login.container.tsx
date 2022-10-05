@@ -53,6 +53,9 @@ const MarketLogin = () => {
         return;
       }
       setAccessToken(accessToken);
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.getItem("");
+
       void router.push("/");
     } catch (error) {
       if (error instanceof Error) {

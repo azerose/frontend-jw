@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function Home() {
+const Home = () => {
   const [imgUrls, setImgUrls] = useState("");
 
   useEffect(() => {
@@ -17,4 +17,6 @@ export default function Home() {
       <img src={imgUrls} />
     </>
   );
-}
+};
+
+export default Home;

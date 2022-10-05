@@ -13,7 +13,6 @@ const BoardWriteUI = ({
   onClickAddressSearch,
   onCompleteAddressSearch,
   onClickHandleCancel,
-  onClickImage,
   onChangeFile,
   ner,
   per,
@@ -27,7 +26,6 @@ const BoardWriteUI = ({
   isOpen,
   add,
   addo,
-  fileRef,
 }: IBoardWriteUI) => {
   console.log(data);
   return (
@@ -126,12 +124,12 @@ const BoardWriteUI = ({
             사진 첨부
             <S.InputBox>
               {new Array(3).fill(3).map((_, index) => (
-                <S.SecButton key={index} onClick={onClickImage}>
+                <S.SecButton key={index} htmlFor={`file${index}`}>
                   +
                   <S.ImageLink
                     type="file"
-                    onChange={onChangeFile}
-                    ref={fileRef}
+                    id={`file${index}`}
+                    onChange={onChangeFile(index)}
                   />
                 </S.SecButton>
               ))}

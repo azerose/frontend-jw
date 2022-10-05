@@ -70,10 +70,12 @@ export const FirstButton = styled.button`
   margin: 0px 16px;
 `;
 
-export const SecButton = styled.button`
+export const SecButton = styled.label`
+  display: inline-block;
   width: 78px;
   height: 78px;
   margin-right: 24px;
+  background-color: gray;
 `;
 
 export const Main = styled.div`
