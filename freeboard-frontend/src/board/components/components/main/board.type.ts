@@ -8,6 +8,7 @@ export interface IBoardProps {
 export interface IUpdateBoardInputs {
   title?: string;
   contents?: string;
+  images?: string[];
 }
 
 export interface IUpdateBoardInput {

@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useRef, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router.js";
 import { CREATE_BOARD } from "../detail/boardDetail.query";
@@ -27,6 +27,8 @@ const Board = (props: IBoardProps) => {
   const [ater, setAter] = useState("");
   const [ler, setLer] = useState("");
   const [imgUrl, setImgUrl] = useState(["", "", ""]);
+
+  console.log(imgUrl);
 
   const [uploadFile] = useMutation<
     Pick<IMutation, "uploadFile">,
@@ -161,6 +163,11 @@ const Board = (props: IBoardProps) => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    setImgUrl(props.data?.fetchBoard.images);
+  }, []);
+  // console.log(imgUrl);
+
   const onClickUpdate = async () => {
     const updateBoardData: IUpdateBoardInput = {
       password: input.ps,
@@ -169,6 +176,7 @@ const Board = (props: IBoardProps) => {
     };
     if (input.title) updateBoardData.updateBoardInput.title = input.title;
     if (input.main) updateBoardData.updateBoardInput.contents = input.main;
+    if (imgUrl) updateBoardData.updateBoardInput.images = imgUrl;
     try {
       const updateBoardResult = await upadateBoard({
         variables: updateBoardData,
@@ -287,6 +295,7 @@ const Board = (props: IBoardProps) => {
       data={props.data}
       isOpen={isOpen}
       onChangeFile={onChangeFile}
+      imgUrl={imgUrl}
     />
   );
 };

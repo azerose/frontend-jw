@@ -12,6 +12,7 @@ import {
   IQueryFetchBoardArgs,
 } from "../../../../commons/types/generated/types";
 import { errorMsg } from "../../../../commons/modal/modalFun";
+import { useEffect } from "react";
 
 const DetailPage = () => {
   const router = useRouter();
@@ -21,14 +22,14 @@ const DetailPage = () => {
 
   console.log(router);
 
-  const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(
-    FETCH_BOARD,
-    {
-      variables: {
-        boardId: String(router.query.id),
-      },
-    }
-  );
+  const { data, refetch } = useQuery<
+    Pick<IQuery, "fetchBoard">,
+    IQueryFetchBoardArgs
+  >(FETCH_BOARD, {
+    variables: {
+      boardId: String(router.query.id),
+    },
+  });
   console.log(data);
 
   const onClickLike = async () => {
@@ -69,6 +70,12 @@ const DetailPage = () => {
   const onClickMoveEdit = () => {
     router.push(`/boards/board-detail/${router.query.id}/edit`);
   };
+
+  useEffect(() => {
+    refetch({
+      boardId: String(router.query.id),
+    });
+  }, [data]);
 
   const onClickMoveList = () => {
     router.push("/boards");

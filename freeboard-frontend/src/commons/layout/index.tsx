@@ -14,7 +14,12 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const HIDDEN_BANNERS = ["/Market/login", "/boards/detail", "/Market/signup"];
+const HIDDEN_BANNERS = [
+  "/Market/login",
+  "/boards/detail",
+  "/Market/signup",
+  "/Market/newproducts",
+];
 
 const Layout = (props: ILayoutProps) => {
   const router = useRouter();

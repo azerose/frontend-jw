@@ -38,6 +38,14 @@ const SignUpPage = () => {
   };
 
   const onClickSignUp = async () => {
+    if (!email.includes("@")) {
+      errorMsg("이메일에는 @가 들어가야합니다");
+      return;
+    }
+    if (!password.includes("!") && !password.includes("@")) {
+      errorMsg("비밀번호는 5자이상 ! 또는 @가 들어가야합니다");
+      return;
+    }
     if (passwordConfirm !== password) {
       errorMsg("비밀번호가 서로 다릅니다");
       return;

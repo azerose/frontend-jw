@@ -8,6 +8,7 @@ const FETCH_BOARD = gql`
       writer
       title
       contents
+      images
     }
   }
 `;

@@ -26,6 +26,7 @@ const BoardWriteUI = ({
   isOpen,
   add,
   addo,
+  imgUrl,
 }: IBoardWriteUI) => {
   console.log(data);
   return (
@@ -123,16 +124,38 @@ const BoardWriteUI = ({
           <S.WrapperDivide>
             사진 첨부
             <S.InputBox>
-              {new Array(3).fill(3).map((_, index) => (
-                <S.SecButton key={index} htmlFor={`file${index}`}>
-                  +
-                  <S.ImageLink
-                    type="file"
-                    id={`file${index}`}
-                    onChange={onChangeFile(index)}
-                  />
-                </S.SecButton>
-              ))}
+              {new Array(3).fill(3).map((_, index) => {
+                return (
+                  <>
+                    {imgUrl[index] ? (
+                      <S.SecButton
+                        style={{
+                          backgroundImage: `url(https://storage.googleapis.com/${imgUrl[index]})`,
+                          backgroundColor: "#fff",
+                          backgroundSize: "cover",
+                        }}
+                        key={index}
+                        htmlFor={`file${index}`}
+                      >
+                        <S.ImageLink
+                          type="file"
+                          id={`file${index}`}
+                          onChange={onChangeFile(index)}
+                        />
+                      </S.SecButton>
+                    ) : (
+                      <S.SecButton key={index} htmlFor={`file${index}`}>
+                        +
+                        <S.ImageLink
+                          type="file"
+                          id={`file${index}`}
+                          onChange={onChangeFile(index)}
+                        />
+                      </S.SecButton>
+                    )}
+                  </>
+                );
+              })}
             </S.InputBox>
           </S.WrapperDivide>
         </S.Main>
