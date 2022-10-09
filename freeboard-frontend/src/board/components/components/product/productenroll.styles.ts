@@ -1,3 +1,4 @@
+import { CheckCircleOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import { Modal } from "antd";
 import DaumPostcodeEmbed from "react-daum-postcode";
@@ -94,4 +95,65 @@ export const AddressInput = styled.input`
   width: 75%;
   height: 40px;
   border: 1px solid rgb(245, 126, 0);
+`;
+
+export const ConditionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const ProductLabel = styled.label`
+  margin: 0 10px;
+`;
+
+export const OutLineStyle = styled(CheckCircleOutlined)`
+  margin-left: 10px;
+`;
+
+export const PriceWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 75%;
+`;
+
+export const PriceInput = styled.input`
+  width: 40%;
+  height: 40px;
+  border: 1px solid rgb(245, 126, 0);
+  margin-right: 5px;
+  outline: none;
+`;
+
+export const ContentsArea = styled.textarea`
+  border: 1px solid rgb(245, 126, 0);
+  width: 75%;
+  outline: none;
+`;
+
+export const TagInput = styled.input`
+  outline: none;
+  border: 1px solid rgb(245, 126, 0);
+  height: 50px;
+  width: 75%;
+`;
+
+export const CountInput = styled.input`
+  border: 1px solid rgb(245, 126, 0);
+  height: 50px;
+  width: 30%;
+  margin-right: 10px;
+`;
+
+export const EnrollBtn = styled.button`
+  background-color: red;
+  color: white;
+  border: none;
+  width: 16%;
+  height: 50px;
+`;
+
+export const EnrollBtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 `;

@@ -1,5 +1,3 @@
-import { CheckCircleOutlined } from "@ant-design/icons";
-import { ChangeEvent, useState } from "react";
 import * as S from "./productenroll.styles";
 import { IEnrollProductUI } from "./productenroll.types";
 
@@ -41,12 +39,12 @@ const EnrollProductUI = ({
           <div>
             <S.ProductTitleWrapper>
               <S.ProductInfo>한줄요약</S.ProductInfo>
-              <S.RemarksInput type="text" />
+              <S.RemarksInput type="text" {...register("remarks")} />
             </S.ProductTitleWrapper>
           </div>
           <S.ProductTitleWrapper>
             <S.ProductInfo>판매자명</S.ProductInfo>
-            <S.SellerInput type="text" />
+            <S.SellerInput type="text" {...register("seller")} />
           </S.ProductTitleWrapper>
           <S.AddressWrapper>
             <S.ProductInfo>거래지역</S.ProductInfo>
@@ -54,50 +52,61 @@ const EnrollProductUI = ({
               <S.AddressBtn onClick={onClickaddressSearch}>
                 주소 검색
               </S.AddressBtn>
-              <S.AddressInput type="text" />
+              <S.AddressInput
+                type="text"
+                {...register("useditemAddress.address")}
+              />
             </S.AddressBtnWrapper>
           </S.AddressWrapper>
           <div>
             <S.ProductTitleWrapper>
               <S.ProductInfo>상태</S.ProductInfo>
-              <div>
+              <S.ConditionWrapper>
                 <input type="radio" name="condition" />
-                <label>중고상품</label>
+                <S.ProductLabel>중고상품</S.ProductLabel>
                 <input type="radio" name="condition" />
-                <label>새상품</label>
-              </div>
+                <S.ProductLabel>새상품</S.ProductLabel>
+              </S.ConditionWrapper>
             </S.ProductTitleWrapper>
             <S.ProductTitleWrapper>
               <S.ProductInfo>교환</S.ProductInfo>
-              <div>
+              <S.ConditionWrapper>
                 <input type="radio" name="exChange" />
-                <label>교환불가</label>
+                <S.ProductLabel>교환불가</S.ProductLabel>
                 <input type="radio" name="exChange" />
-                <label>교환가능</label>
-              </div>
+                <S.ProductLabel>교환가능</S.ProductLabel>
+              </S.ConditionWrapper>
             </S.ProductTitleWrapper>
             <S.ProductTitleWrapper>
               <S.ProductInfo>가격</S.ProductInfo>
-              <div>
-                <input type="text" />
-                <div>원</div>
-              </div>
-              <div>
-                <CheckCircleOutlined /> 배송비 포함
-              </div>
+              <S.PriceWrapper>
+                <S.PriceInput type="text" {...register("price")} />원
+                <S.OutLineStyle /> 배송비 포함
+              </S.PriceWrapper>
             </S.ProductTitleWrapper>
             <S.ProductTitleWrapper>
               <S.ProductInfo>설명</S.ProductInfo>
-              <input type="text" />
+              <S.ContentsArea
+                placeholder="상품 설명을 입력해주세요"
+                {...register("contents")}
+              />
             </S.ProductTitleWrapper>
             <S.ProductTitleWrapper>
               <S.ProductInfo>연관태그</S.ProductInfo>
-              <input type="text" />
+              <S.TagInput type="text" {...register("tags")} />
             </S.ProductTitleWrapper>
             <S.ProductTitleWrapper>
               <S.ProductInfo>수량</S.ProductInfo>
-              <input type="text" />개
+              <S.CountInput
+                type="text"
+                placeholder="갯수를 입력해주세요"
+                {...register("pickedCount")}
+              />
+              개
             </S.ProductTitleWrapper>
+            <S.EnrollBtnWrapper>
+              <S.EnrollBtn type="submit">상품등록</S.EnrollBtn>
+            </S.EnrollBtnWrapper>
           </div>
         </S.MainWrapper>
       </S.MainForm>

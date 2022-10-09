@@ -1,22 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import ProductListWrite from "../src/board/components/components/productList/productList.presenter";
 
-const Home = () => {
-  const [imgUrls, setImgUrls] = useState("");
-
-  useEffect(() => {
-    const onGetImage = async () => {
-      const result = await axios.get("https://dog.ceo/api/breeds/image/random");
-      setImgUrls(result.data.message);
-    };
-    void onGetImage();
-  }, []);
-
-  return (
-    <>
-      <img src={imgUrls} />
-    </>
-  );
+const ProductList = () => {
+  return <ProductListWrite />;
 };
 
-export default Home;
+export default ProductList;

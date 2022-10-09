@@ -43,4 +43,5 @@ export interface IBoardWriteUI {
   add: string;
   addo: string;
   fileRef: any;
+  imgUrl: any;
 }

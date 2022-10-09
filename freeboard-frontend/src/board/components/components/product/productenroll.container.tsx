@@ -9,15 +9,17 @@ import { CREATE_USEDITEM } from "./productenroll.query";
 import { IFormData } from "./productenroll.types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { errorMsg, success } from "../../../../commons/modal/modalFun";
+import { useRouter } from "next/router";
 import { Myyup } from "./productenroll.schema";
 
 const EnrollProduct = () => {
-  const { register, handleSubmit, formState } = useForm<IFormData>({
+  const router = useRouter();
+  const { register, handleSubmit } = useForm<IFormData>({
     resolver: yupResolver(Myyup),
   });
 
   const [isOpen, setIsOpen] = useState(false);
-  const [address, setAddress] = useState("");
 
   const [createUsedItem] = useMutation<
     Pick<IMutation, "createUseditem">,
@@ -29,7 +31,6 @@ const EnrollProduct = () => {
   };
 
   const onCompleteAddressSearch = () => {
-    setAddress({ ...register("useditemAddress.address") });
     setIsOpen((prev) => !prev);
   };
 
@@ -37,12 +38,19 @@ const EnrollProduct = () => {
     setIsOpen(false);
   };
 
-  const onSubmitEnroll = (data: IFormData) => {
-    const result = createUsedItem({
-      variables: {
-        createUseditemInput: data,
-      },
-    });
+  const onSubmitEnroll = async (data: IFormData) => {
+    console.log(data);
+    try {
+      const result = await createUsedItem({
+        variables: {
+          createUseditemInput: data,
+        },
+      });
+      success("상품이 등록되었습니다");
+      router.push("/");
+    } catch (error) {
+      if (error instanceof Error) errorMsg(error.message);
+    }
   };
 
   return (

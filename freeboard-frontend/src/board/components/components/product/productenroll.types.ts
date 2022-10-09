@@ -20,6 +20,7 @@ interface UseditemAddressinput {
 }
 
 export interface IFormData {
+  seller: string;
   name: string;
   remarks: string;
   contents: string;
@@ -27,4 +28,5 @@ export interface IFormData {
   tags: string[];
   useditemAddress: UseditemAddressinput;
   images: string[];
+  pickedCount: number;
 }

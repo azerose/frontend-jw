@@ -11,4 +11,6 @@ export const Myyup = yup.object({
   tags: yup.string(),
   useditemAddress: yup.object().required(),
   images: yup.string().required(),
+  pickCount: yup.number().min(1).required("상품갯수는 필수입력입니다"),
+  seller: yup.string().required("판매자명은 필수입니다"),
 });
