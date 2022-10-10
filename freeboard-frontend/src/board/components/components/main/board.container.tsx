@@ -267,8 +267,6 @@ const Board = (props: IBoardProps) => {
       }
     };
 
-  console.log(imgUrl);
-
   return (
     <BoardWriteUI
       onChangeName={onChangeName}

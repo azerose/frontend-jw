@@ -5,7 +5,14 @@ export const CREATE_USEDITEM = gql`
     createUseditem(createUseditemInput: $createUseditemInput) {
       _id
       name
-      
+    }
+  }
+`;
+
+export const UPLOAD_FILE = gql`
+  mutation uploadFile($file: Upload!) {
+    uploadFile(file: $file) {
+      url
     }
   }
 `;

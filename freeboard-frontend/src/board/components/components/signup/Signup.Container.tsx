@@ -61,7 +61,7 @@ const SignUpPage = () => {
         },
       });
       success("회원가입 됬습니다");
-      router.push("/");
+      router.push("/Market/login");
     } catch (error) {
       if (error instanceof Error) errorMsg(error.message);
     }

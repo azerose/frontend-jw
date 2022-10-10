@@ -150,10 +150,47 @@ export const EnrollBtn = styled.button`
   border: none;
   width: 16%;
   height: 50px;
+  cursor: pointer;
 `;
 
 export const EnrollBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 20px 0;
+`;
+
+export const ImgBtn = styled.label`
+  display: inline-block;
+  width: 78px;
+  height: 78px;
+  margin-right: 24px;
+  background-color: gray;
+`;
+
+export const ImgInput = styled.input`
+  display: none;
+`;
+
+export const ErrorMsg = styled.div`
+  margin-left: 10px;
+`;
+
+export const BtnWrapper = styled.div`
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
+`;
+
+export const AddressInputWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+export const LatInput = styled.input`
+  width: 10%;
+  margin: 0 10px;
+`;
+
+export const LngInput = styled.input`
+  width: 10%;
 `;

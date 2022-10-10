@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 export interface IEnrollProductUI {
@@ -8,7 +8,14 @@ export interface IEnrollProductUI {
   onClickHandleCancel: () => void;
   onCompleteAddressSearch: (data: any) => void;
   onClickaddressSearch: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickMapSearch: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickMapCancel: () => void;
+  address: string;
   // handleSubmit:
+  onChangeFile: any;
+  imgUrl: string[];
+  formState: any;
+  isMapOpen: boolean;
 }
 
 interface UseditemAddressinput {
@@ -20,7 +27,6 @@ interface UseditemAddressinput {
 }
 
 export interface IFormData {
-  seller: string;
   name: string;
   remarks: string;
   contents: string;
@@ -28,5 +34,4 @@ export interface IFormData {
   tags: string[];
   useditemAddress: UseditemAddressinput;
   images: string[];
-  pickedCount: number;
 }

@@ -28,7 +28,9 @@ export const MainWrapper = styled.div`
 export const ImgWrapper = styled.div`
   width: 100%;
   height: 200px;
-  border: 1px solid black;
+  border: 1px solid rgb(220, 219, 228);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
 `;
 
 export const ProductInfoWrapper = styled.div`
@@ -36,6 +38,8 @@ export const ProductInfoWrapper = styled.div`
   flex-direction: column;
   border: 1px solid green;
   padding: 15px 10px;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
 `;
 
 export const ProductInfoPriceWrapper = styled.div`

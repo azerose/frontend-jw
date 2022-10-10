@@ -38,12 +38,7 @@ const ProductListWrite = () => {
     <>
       <S.WholeWrapper>
         <h2>오늘의 상품 추천</h2>
-        <InfiniteScroll
-          pageStart={0}
-          hasMore={true}
-          useWindow={false}
-          loadMore={onLoadMore}
-        >
+        <InfiniteScroll pageStart={0} hasMore={true} loadMore={onLoadMore}>
           <S.ProductWrapper>
             {data?.fetchUseditems.map((el) => (
               <S.MainWrapper key={el._id}>
@@ -51,7 +46,7 @@ const ProductListWrite = () => {
                 <S.ProductInfoWrapper>
                   <S.ProductInfoName>{el.name}</S.ProductInfoName>
                   <S.ProductInfoPriceWrapper>
-                    <S.ProductPrice>{el.price}</S.ProductPrice>
+                    <S.ProductPrice>{el.price}원</S.ProductPrice>
                     <S.EnrollTime>{getDate(el.createdAt)}</S.EnrollTime>
                   </S.ProductInfoPriceWrapper>
                 </S.ProductInfoWrapper>

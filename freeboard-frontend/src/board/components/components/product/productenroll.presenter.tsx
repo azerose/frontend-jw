@@ -1,3 +1,4 @@
+import KakaoMap from "../../../../commons/modal/kakaomap";
 import * as S from "./productenroll.styles";
 import { IEnrollProductUI } from "./productenroll.types";
 
@@ -9,9 +10,25 @@ const EnrollProductUI = ({
   onCompleteAddressSearch,
   handleSubmit,
   onClickaddressSearch,
+  address,
+  onChangeFile,
+  imgUrl,
+  formState,
+  isMapOpen,
+  onClickMapSearch,
+  onClickMapCancel,
 }: IEnrollProductUI) => {
   return (
     <>
+      {isMapOpen && (
+        <S.AddressModal
+          visible={true}
+          onOk={onClickMapCancel}
+          onCancel={onClickMapCancel}
+        >
+          <KakaoMap />
+        </S.AddressModal>
+      )}
       {isOpen && (
         <S.AddressModal visible={true} onCancel={onClickHandleCancel}>
           <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
@@ -22,7 +39,39 @@ const EnrollProductUI = ({
           <S.ProductInfoWrapper>
             <S.ProductInfo>상품이미지</S.ProductInfo>
             <div>
-              <input type="file" />
+              {new Array(3).fill(1).map((_, index) => {
+                return (
+                  <>
+                    {imgUrl[index] ? (
+                      <S.ImgBtn
+                        style={{
+                          backgroundImage: `url(https://storage.googleapis.com/${imgUrl[index]})`,
+                          backgroundColor: "#fff",
+                          backgroundSize: "cover",
+                        }}
+                        key={index}
+                        htmlFor={`file${index}`}
+                      >
+                        +
+                        <S.ImgInput
+                          type="file"
+                          id={`file${index}`}
+                          onChange={onChangeFile(index)}
+                        />
+                      </S.ImgBtn>
+                    ) : (
+                      <S.ImgBtn key={index} htmlFor={`file${index}`}>
+                        +
+                        <S.ImgInput
+                          type="file"
+                          id={`file${index}`}
+                          onChange={onChangeFile(index)}
+                        />
+                      </S.ImgBtn>
+                    )}
+                  </>
+                );
+              })}
             </div>
           </S.ProductInfoWrapper>
           <div>
@@ -34,28 +83,38 @@ const EnrollProductUI = ({
                 maxLength={40}
                 {...register("name")}
               />
+              <S.ErrorMsg>{formState.errors.name?.message}</S.ErrorMsg>
             </S.ProductTitleWrapper>
           </div>
           <div>
             <S.ProductTitleWrapper>
               <S.ProductInfo>한줄요약</S.ProductInfo>
+
               <S.RemarksInput type="text" {...register("remarks")} />
+              <S.ErrorMsg>{formState.errors.remarks?.message}</S.ErrorMsg>
             </S.ProductTitleWrapper>
           </div>
-          <S.ProductTitleWrapper>
-            <S.ProductInfo>판매자명</S.ProductInfo>
-            <S.SellerInput type="text" {...register("seller")} />
-          </S.ProductTitleWrapper>
           <S.AddressWrapper>
             <S.ProductInfo>거래지역</S.ProductInfo>
             <S.AddressBtnWrapper>
-              <S.AddressBtn onClick={onClickaddressSearch}>
-                주소 검색
-              </S.AddressBtn>
-              <S.AddressInput
-                type="text"
-                {...register("useditemAddress.address")}
-              />
+              <S.BtnWrapper>
+                <S.AddressBtn type="button" onClick={onClickaddressSearch}>
+                  주소 검색
+                </S.AddressBtn>
+                <S.AddressBtn type="button" onClick={onClickMapSearch}>
+                  지도 검색
+                </S.AddressBtn>
+              </S.BtnWrapper>
+              <S.AddressInputWrapper>
+                <S.AddressInput
+                  type="text"
+                  readOnly
+                  value={address}
+                  {...register("useditemAddress.address")}
+                />
+                <S.LatInput id={"clickLat"} placeholder="위도(LAT)" />
+                <S.LngInput id={"clickLng"} placeholder="경도(LNG)" />
+              </S.AddressInputWrapper>
             </S.AddressBtnWrapper>
           </S.AddressWrapper>
           <div>
@@ -80,29 +139,25 @@ const EnrollProductUI = ({
             <S.ProductTitleWrapper>
               <S.ProductInfo>가격</S.ProductInfo>
               <S.PriceWrapper>
-                <S.PriceInput type="text" {...register("price")} />원
+                <S.PriceInput type="number" {...register("price")} />원
                 <S.OutLineStyle /> 배송비 포함
+                <S.ErrorMsg>{formState.errors.price?.message}</S.ErrorMsg>
               </S.PriceWrapper>
             </S.ProductTitleWrapper>
             <S.ProductTitleWrapper>
               <S.ProductInfo>설명</S.ProductInfo>
+
               <S.ContentsArea
                 placeholder="상품 설명을 입력해주세요"
                 {...register("contents")}
               />
+              <S.ErrorMsg>{formState.errors.contents?.message}</S.ErrorMsg>
             </S.ProductTitleWrapper>
             <S.ProductTitleWrapper>
               <S.ProductInfo>연관태그</S.ProductInfo>
+
               <S.TagInput type="text" {...register("tags")} />
-            </S.ProductTitleWrapper>
-            <S.ProductTitleWrapper>
-              <S.ProductInfo>수량</S.ProductInfo>
-              <S.CountInput
-                type="text"
-                placeholder="갯수를 입력해주세요"
-                {...register("pickedCount")}
-              />
-              개
+              <S.ErrorMsg>{formState.errors.tags?.message}</S.ErrorMsg>
             </S.ProductTitleWrapper>
             <S.EnrollBtnWrapper>
               <S.EnrollBtn type="submit">상품등록</S.EnrollBtn>

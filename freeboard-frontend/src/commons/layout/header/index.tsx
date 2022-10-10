@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState, isTokenState } from "../../store";
 import { IQuery } from "../../types/generated/types";
@@ -36,7 +36,6 @@ const LayoutHeader = () => {
     router.push("/Market/login");
   };
 
-  console.log(data);
   return (
     <>
       <S.HeaderWrapper>
