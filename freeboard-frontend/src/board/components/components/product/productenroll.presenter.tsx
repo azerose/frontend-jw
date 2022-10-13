@@ -1,6 +1,8 @@
 import KakaoMap from "../../../../commons/modal/kakaomap";
 import * as S from "./productenroll.styles";
 import { IEnrollProductUI } from "./productenroll.types";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const EnrollProductUI = ({
   isOpen,
@@ -10,13 +12,19 @@ const EnrollProductUI = ({
   onCompleteAddressSearch,
   handleSubmit,
   onClickaddressSearch,
-  address,
   onChangeFile,
   imgUrl,
   formState,
   isMapOpen,
   onClickMapSearch,
   onClickMapCancel,
+  onChangeLat,
+  onChangeLng,
+  address,
+  isEdit,
+  onClickEdit,
+  data,
+  onChangeContents,
 }: IEnrollProductUI) => {
   return (
     <>
@@ -34,7 +42,11 @@ const EnrollProductUI = ({
           <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
         </S.AddressModal>
       )}
-      <S.MainForm onSubmit={handleSubmit(onSubmitEnroll)}>
+      <S.MainForm
+        onSubmit={
+          isEdit ? handleSubmit(onClickEdit) : handleSubmit(onSubmitEnroll)
+        }
+      >
         <S.MainWrapper>
           <S.ProductInfoWrapper>
             <S.ProductInfo>상품이미지</S.ProductInfo>
@@ -81,6 +93,8 @@ const EnrollProductUI = ({
                 type="text"
                 placeholder="상품 제목을 입력해주세요."
                 maxLength={40}
+                defaultValue={data?.fetchUseditem.name || ""}
+                readOnly={!!data?.fetchUseditem.name}
                 {...register("name")}
               />
               <S.ErrorMsg>{formState.errors.name?.message}</S.ErrorMsg>
@@ -106,14 +120,17 @@ const EnrollProductUI = ({
                 </S.AddressBtn>
               </S.BtnWrapper>
               <S.AddressInputWrapper>
-                <S.AddressInput
-                  type="text"
-                  readOnly
-                  value={address}
-                  {...register("useditemAddress.address")}
+                <S.AddressInput type="text" readOnly value={address} />
+                <S.LatInput
+                  id={"clickLat"}
+                  placeholder="위도(LAT)"
+                  onChange={onChangeLat}
                 />
-                <S.LatInput id={"clickLat"} placeholder="위도(LAT)" />
-                <S.LngInput id={"clickLng"} placeholder="경도(LNG)" />
+                <S.LngInput
+                  id={"clickLng"}
+                  placeholder="경도(LNG)"
+                  onChange={onChangeLng}
+                />
               </S.AddressInputWrapper>
             </S.AddressBtnWrapper>
           </S.AddressWrapper>
@@ -146,11 +163,15 @@ const EnrollProductUI = ({
             </S.ProductTitleWrapper>
             <S.ProductTitleWrapper>
               <S.ProductInfo>설명</S.ProductInfo>
-
-              <S.ContentsArea
+              <ReactQuill
+                placeholder="상품 설명을 입력해주세요"
+                onChange={onChangeContents}
+              />
+              {/* <S.ContentsArea
                 placeholder="상품 설명을 입력해주세요"
                 {...register("contents")}
-              />
+                defaultValue={data?.fetchUseditem.contents}
+              /> */}
               <S.ErrorMsg>{formState.errors.contents?.message}</S.ErrorMsg>
             </S.ProductTitleWrapper>
             <S.ProductTitleWrapper>
@@ -160,7 +181,9 @@ const EnrollProductUI = ({
               <S.ErrorMsg>{formState.errors.tags?.message}</S.ErrorMsg>
             </S.ProductTitleWrapper>
             <S.EnrollBtnWrapper>
-              <S.EnrollBtn type="submit">상품등록</S.EnrollBtn>
+              <S.EnrollBtn type="submit">
+                {isEdit ? "상품수정" : "상품등록"}
+              </S.EnrollBtn>
             </S.EnrollBtnWrapper>
           </div>
         </S.MainWrapper>

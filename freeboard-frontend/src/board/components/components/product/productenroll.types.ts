@@ -1,5 +1,11 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, ChangeEventHandler, MouseEvent } from "react";
 import { UseFormRegister } from "react-hook-form";
+import { IQuery } from "../../../../commons/types/generated/types";
+
+export interface IEnrollProps {
+  data: Pick<IQuery, "fetchUseditem">;
+  isEdit: boolean;
+}
 
 export interface IEnrollProductUI {
   isOpen: boolean;
@@ -10,12 +16,15 @@ export interface IEnrollProductUI {
   onClickaddressSearch: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickMapSearch: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickMapCancel: () => void;
+  onClickEdit: (data: IFormData) => void;
   address: string;
   // handleSubmit:
   onChangeFile: any;
   imgUrl: string[];
   formState: any;
   isMapOpen: boolean;
+  isEdit: boolean;
+  data: Pick<IQuery, "fetchUseditem">;
 }
 
 interface UseditemAddressinput {

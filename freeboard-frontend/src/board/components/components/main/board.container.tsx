@@ -54,7 +54,7 @@ const Board = (props: IBoardProps) => {
     lk: "",
   });
 
-  console.log(input);
+  // console.log(input);
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, name: event.target.value });
     if (
@@ -164,8 +164,10 @@ const Board = (props: IBoardProps) => {
   };
 
   useEffect(() => {
-    setImgUrl(props.data?.fetchBoard.images);
-  }, []);
+    if (props.data) {
+      setImgUrl(props.data?.fetchBoard.images);
+    }
+  }, [props.data]);
   // console.log(imgUrl);
 
   const onClickUpdate = async () => {

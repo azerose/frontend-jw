@@ -1,8 +1,17 @@
+import { useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { FETCH_USEDITEM } from "../../../board/components/components/productdetail/product.detail.query";
+import { IQuery, IQueryFetchUseditemArgs } from "../../types/generated/types";
 
 declare const window: typeof globalThis & { kakao: any };
 
 export default function KakaoMap() {
+  const router = useRouter();
+  const { data } = useQuery<
+    Pick<IQuery, "fetchUseditem">,
+    IQueryFetchUseditemArgs
+  >(FETCH_USEDITEM, { variables: { useditemId: String(router.query.id) } });
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
@@ -14,7 +23,10 @@ export default function KakaoMap() {
         const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
         const options = {
           // 지도를 생성할 때 필요한 기본 옵션
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표.
+          center: new window.kakao.maps.LatLng(
+            data?.fetchUseditem.useditemAddress?.lat,
+            data?.fetchUseditem.useditemAddress?.lng
+          ), // 지도의 중심좌표.
           level: 3, // 지도의 레벨(확대, 축소 정도)
         };
 

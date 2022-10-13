@@ -21,7 +21,7 @@ const ApolloSetting = (props: IApolloSetting) => {
 
   useEffect(() => {
     const result = localStorage.getItem("accessToken");
-    setAccessToken(result);
+    if (result) setAccessToken(result);
   }, []);
 
   const uploadLink = createUploadLink({
@@ -31,6 +31,7 @@ const ApolloSetting = (props: IApolloSetting) => {
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink]),
     cache: GLOBAL_STATE,
+    connectToDevTools: true,
   });
 
   // prettier-ignore

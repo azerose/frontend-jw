@@ -1,4 +1,6 @@
 import { useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
+import { MouseEvent } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import {
   IQuery,
@@ -9,6 +11,7 @@ import { FETCH_USEDITEMS } from "./productList.queries";
 import * as S from "./productLIst.styles";
 
 const ProductListWrite = () => {
+  const router = useRouter();
   const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
@@ -34,6 +37,10 @@ const ProductListWrite = () => {
     });
   };
 
+  const onClickMoveDetail = (event: MouseEvent<HTMLDivElement>) => {
+    void router.push(`/Market/detail/${event.currentTarget.id}`);
+  };
+
   return (
     <>
       <S.WholeWrapper>
@@ -42,12 +49,23 @@ const ProductListWrite = () => {
           <S.ProductWrapper>
             {data?.fetchUseditems.map((el) => (
               <S.MainWrapper key={el._id}>
-                <S.ImgWrapper>{el.images}</S.ImgWrapper>
+                <S.ImgWrapper>
+                  <img
+                    style={{ width: "100%", height: "100%" }}
+                    src={`https://storage.googleapis.com/${el.images[0]}`}
+                  />
+                </S.ImgWrapper>
                 <S.ProductInfoWrapper>
-                  <S.ProductInfoName>{el.name}</S.ProductInfoName>
+                  <S.ProductInfoName id={el._id} onClick={onClickMoveDetail}>
+                    {el.name}
+                  </S.ProductInfoName>
                   <S.ProductInfoPriceWrapper>
-                    <S.ProductPrice>{el.price}원</S.ProductPrice>
-                    <S.EnrollTime>{getDate(el.createdAt)}</S.EnrollTime>
+                    <S.ProductPrice id={el._id} onClick={onClickMoveDetail}>
+                      {el.price}원
+                    </S.ProductPrice>
+                    <S.EnrollTime id={el._id} onClick={onClickMoveDetail}>
+                      {getDate(el.createdAt)}
+                    </S.EnrollTime>
                   </S.ProductInfoPriceWrapper>
                 </S.ProductInfoWrapper>
               </S.MainWrapper>

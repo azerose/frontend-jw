@@ -33,7 +33,7 @@ const LayoutHeader = () => {
   };
 
   const onClickMarket = () => {
-    router.push("/Market/login");
+    router.push("/Market/newproducts");
   };
 
   return (
@@ -45,7 +45,7 @@ const LayoutHeader = () => {
           <img src="/search.png/" />
         </S.SearchWrapper>
         <S.DivWrapper>
-          {accessToken ? `${data?.fetchUserLoggedIn.name}님 환영합니다.` : ""}
+          {data ? `${data?.fetchUserLoggedIn.name}님 환영합니다.` : ""}
         </S.DivWrapper>
         <S.DivWrapper>
           <S.SellImg src="/sell.png/" onClick={onClickHome} />

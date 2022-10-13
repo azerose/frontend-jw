@@ -11,11 +11,19 @@ export const FETCH_USEDITEM = gql`
       tags
       images
       pickedCount
-      usedItemAddress {
-        addresslat
+      useditemAddress {
+        address
+        addressDetail
+        lat
         lng
       }
       createdAt
     }
+  }
+`;
+
+export const DELETE_USEDITEM = gql`
+  mutation deleteUseditem($useditemId: ID!) {
+    deleteUseditem(useditemId: $useditemId)
   }
 `;

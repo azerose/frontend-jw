@@ -28,7 +28,7 @@ const BoardWriteUI = ({
   addo,
   imgUrl,
 }: IBoardWriteUI) => {
-  console.log(data);
+  console.log(imgUrl);
   return (
     <>
       {isOpen && (

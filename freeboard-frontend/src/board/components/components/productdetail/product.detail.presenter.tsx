@@ -1,23 +1,80 @@
 import { IProductDetailWriteUI } from "./product.detail.types";
+import * as S from "./product.detail.styles";
+import KakaoMap from "../../../../commons/modal/kakaomap";
 
-const ProductDetailWriteUI = ({ data }: IProductDetailWriteUI) => {
+const ProductDetailWriteUI = ({
+  data,
+  onClickDelete,
+  onClickMoveEdit,
+}: IProductDetailWriteUI) => {
+  console.log(data?.fetchUseditem.images);
   return (
     <>
-      <div>
+      <S.MainWrapper>
         <div>
-          <img />
+          <S.ImgWrapper>
+            {data?.fetchUseditem.images?.map((el) =>
+              el ? (
+                <img
+                  style={{ width: "100%", height: "100%" }}
+                  src={`https://storage.googleapis.com/${el}`}
+                />
+              ) : (
+                <div />
+              )
+            )}
+          </S.ImgWrapper>
+          <div>
+            <KakaoMap />
+          </div>
         </div>
-        <div>
-          <div>{data ? data?.fetchUseditem.name : "로딩중"}</div>
-          <div>한줄소개</div>
-          <div>가격</div>
-          <div>찜개수</div>
-          <div>등록시간</div>
-          <div>상품정보</div>
-          <div>상품태그</div>
-          <div>거래장소</div>
-        </div>
-      </div>
+        <S.TextWrapper>
+          <S.TitleMainWrapper>
+            <S.titleWrapper>
+              {data ? data?.fetchUseditem.name : "로딩중"}
+            </S.titleWrapper>
+            <S.PriceWrappaer>{data?.fetchUseditem.price}원</S.PriceWrappaer>
+          </S.TitleMainWrapper>
+          <S.TitleBottomWrapper>
+            <S.TextContentsWrapper>
+              <S.TextStyle>-한줄요약:</S.TextStyle>
+              <div>{data ? data.fetchUseditem.remarks : "로딩"}</div>
+            </S.TextContentsWrapper>
+            <S.TextContentsWrapper>
+              <S.TextStyle>-찜개수:</S.TextStyle>
+              <div>{data?.fetchUseditem.pickedCount}</div>
+            </S.TextContentsWrapper>
+            <S.TextContentsWrapper>
+              <S.TextStyle>-등록시간:</S.TextStyle>
+              <div>{data?.fetchUseditem.createdAt.slice(0, 10)}</div>
+            </S.TextContentsWrapper>
+            <S.TextContentsWrapper>
+              <S.TextStyle>-상품정보:</S.TextStyle>
+              <div>{data?.fetchUseditem.contents}</div>
+            </S.TextContentsWrapper>
+            <S.TextContentsWrapper>
+              <S.TextStyle>-태그:</S.TextStyle>
+              <div>{data?.fetchUseditem.tags}</div>
+            </S.TextContentsWrapper>
+            <S.TextContentsWrapper>
+              <S.TextStyle>-주소:</S.TextStyle>
+              <div>{data?.fetchUseditem.useditemAddress?.address}</div>
+            </S.TextContentsWrapper>
+            <S.TextContentsWrapper>
+              <S.TextStyle>-위도:</S.TextStyle>
+              <div>{data?.fetchUseditem.useditemAddress?.lat}</div>
+            </S.TextContentsWrapper>
+            <S.TextContentsWrapper>
+              <S.TextStyle>-경도:</S.TextStyle>
+              <div>{data?.fetchUseditem.useditemAddress?.lng}</div>
+            </S.TextContentsWrapper>
+          </S.TitleBottomWrapper>
+        </S.TextWrapper>
+      </S.MainWrapper>
+      <S.MutationBtnWrapper>
+        <S.MutationBtn onClick={onClickDelete}>글 삭제하기</S.MutationBtn>
+        <S.MutationBtn onClick={onClickMoveEdit}>글 수정하기</S.MutationBtn>
+      </S.MutationBtnWrapper>
     </>
   );
 };
