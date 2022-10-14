@@ -20,6 +20,8 @@ import { useRouter } from "next/router";
 import { Myyup } from "./productenroll.schema";
 import { checkValidationFile } from "../../../commons/validation/validationFile";
 import { Modal } from "antd";
+import { useRecoilState } from "recoil";
+import { MapAddressState } from "../../../../commons/store";
 
 const EnrollProduct = (props: IEnrollProps) => {
   const router = useRouter();
@@ -30,7 +32,8 @@ const EnrollProduct = (props: IEnrollProps) => {
   const [imgUrl, setImgUrl] = useState(["", "", ""]);
   const [isOpen, setIsOpen] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
-  const [address, setAddress] = useState("");
+
+  const [MapAddress, setMapAddress] = useRecoilState(MapAddressState);
 
   const [createUsedItem] = useMutation<
     Pick<IMutation, "createUseditem">,
@@ -52,7 +55,7 @@ const EnrollProduct = (props: IEnrollProps) => {
   };
 
   const onCompleteAddressSearch = (data: any) => {
-    setAddress(data.address);
+    setMapAddress(data.address);
     setIsOpen((prev) => !prev);
     setValue("useditemAddress.address", data.address);
   };
@@ -150,7 +153,7 @@ const EnrollProduct = (props: IEnrollProps) => {
       onClickMapCancel={onClickMapCancel}
       onChangeLat={onChangeLat}
       onChangeLng={onChangeLng}
-      address={address}
+      MapAddress={MapAddress}
       isEdit={props.isEdit}
       onClickEdit={onClickEdit}
       data={props.data}

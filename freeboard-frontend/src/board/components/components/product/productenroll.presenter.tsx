@@ -20,7 +20,7 @@ const EnrollProductUI = ({
   onClickMapCancel,
   onChangeLat,
   onChangeLng,
-  address,
+  MapAddress,
   isEdit,
   onClickEdit,
   data,
@@ -120,7 +120,7 @@ const EnrollProductUI = ({
                 </S.AddressBtn>
               </S.BtnWrapper>
               <S.AddressInputWrapper>
-                <S.AddressInput type="text" readOnly value={address} />
+                <S.AddressInput type="text" readOnly value={MapAddress} />
                 <S.LatInput
                   id={"clickLat"}
                   placeholder="위도(LAT)"

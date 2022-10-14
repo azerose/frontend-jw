@@ -1,13 +1,17 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 import { FETCH_USEDITEM } from "../../../board/components/components/productdetail/product.detail.query";
+import { MapAddressState } from "../../store";
 import { IQuery, IQueryFetchUseditemArgs } from "../../types/generated/types";
 
 declare const window: typeof globalThis & { kakao: any };
 
 export default function KakaoMap() {
   const router = useRouter();
+
+  const [MapAddress, setMapAddress] = useRecoilState(MapAddressState);
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
@@ -16,6 +20,8 @@ export default function KakaoMap() {
     const script = document.createElement("script");
     script.src =
       "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=3184a326497a8295a49c511f252ae15b";
+    script.src =
+      "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=3184a326497a8295a49c511f252ae15b&libraries=services";
     document.head.appendChild(script);
 
     script.onload = () => {
@@ -24,11 +30,20 @@ export default function KakaoMap() {
         const options = {
           // 지도를 생성할 때 필요한 기본 옵션
           center: new window.kakao.maps.LatLng(
-            data?.fetchUseditem.useditemAddress?.lat,
-            data?.fetchUseditem.useditemAddress?.lng
+            data ? data?.fetchUseditem.useditemAddress?.lat : 33.450701,
+            data ? data?.fetchUseditem.useditemAddress?.lng : 126.570667
           ), // 지도의 중심좌표.
           level: 3, // 지도의 레벨(확대, 축소 정도)
         };
+
+        const geocoder = new window.kakao.maps.services.Geocoder();
+
+        const callback = function (result: any, status: any) {
+          if (status === window.kakao.maps.services.Status.OK) {
+            console.log(result);
+          }
+        };
+        geocoder.addressSearch(MapAddress, callback);
 
         const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
 

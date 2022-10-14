@@ -9,3 +9,8 @@ export const isTokenState = atom({
   key: "isTokenState",
   default: false,
 });
+
+export const MapAddressState = atom({
+  key: "MapAddressState",
+  default: "",
+});

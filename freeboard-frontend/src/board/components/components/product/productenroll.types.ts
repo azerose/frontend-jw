@@ -17,7 +17,7 @@ export interface IEnrollProductUI {
   onClickMapSearch: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickMapCancel: () => void;
   onClickEdit: (data: IFormData) => void;
-  address: string;
+  MapAddress: string;
   // handleSubmit:
   onChangeFile: any;
   imgUrl: string[];

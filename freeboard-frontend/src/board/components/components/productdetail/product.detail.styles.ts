@@ -2,18 +2,26 @@ import styled from "@emotion/styled";
 
 export const MainWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   width: 1200px;
-  justify-content: space-between;
-  margin: 30px 0;
+`;
+
+export const ImgContentsWrapper = styled.div`
+  display: flex;
 `;
 
 export const ImgWrapper = styled.div`
-  width: 40%;
-  height: 40%;
+  width: 90%;
+  height: 100%;
 `;
 
 export const TextWrapper = styled.div`
-  width: 58%;
+  width: 66%;
+  margin-left: 30px;
+`;
+
+export const TitleContentsWrapper = styled.div`
+  padding-top: 50px;
 `;
 
 export const titleWrapper = styled.div`
@@ -35,18 +43,17 @@ export const TitleMainWrapper = styled.div`
 
 export const TitleBottomWrapper = styled.div`
   display: flex;
-  flex-direction: column;
   margin: 15px 0;
 `;
 
 export const TextContentsWrapper = styled.div`
   width: 100%;
-  font-size: 14px;
+  font-size: 20px;
   display: flex;
 `;
 
 export const TextStyle = styled.div`
-  width: 15%;
+  width: 22%;
   color: #999999;
   padding-left: 15px;
 `;
@@ -59,4 +66,13 @@ export const MutationBtnWrapper = styled.div`
 
 export const MutationBtn = styled.button`
   height: 50px;
+`;
+
+export const ImgMapWrapper = styled.div`
+  display: flex;
+`;
+
+export const MapDiv = styled.div`
+  height: 30%;
+  margin: 50px 0;
 `;

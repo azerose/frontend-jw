@@ -5,13 +5,12 @@ import KakaoMap from "../../../../commons/modal/kakaomap";
 const ProductDetailWriteUI = ({
   data,
   onClickDelete,
-  onClickMoveEdit,
 }: IProductDetailWriteUI) => {
   console.log(data?.fetchUseditem.images);
   return (
     <>
       <S.MainWrapper>
-        <div>
+        <S.ImgContentsWrapper>
           <S.ImgWrapper>
             {data?.fetchUseditem.images?.map((el) =>
               el ? (
@@ -24,38 +23,44 @@ const ProductDetailWriteUI = ({
               )
             )}
           </S.ImgWrapper>
-          <div>
+
+          <S.TextWrapper>
+            <S.TitleMainWrapper>
+              <S.titleWrapper>
+                {data ? data?.fetchUseditem.name : "로딩중"}
+              </S.titleWrapper>
+              <S.PriceWrappaer>{data?.fetchUseditem.price}원</S.PriceWrappaer>
+            </S.TitleMainWrapper>
+            <S.TitleContentsWrapper>
+              <S.TextContentsWrapper>
+                <S.TextStyle>-한줄요약:</S.TextStyle>
+                <div>{data ? data.fetchUseditem.remarks : "로딩"}</div>
+              </S.TextContentsWrapper>
+              <S.TextContentsWrapper>
+                <S.TextStyle>-찜개수:</S.TextStyle>
+                <div>{data?.fetchUseditem.pickedCount}</div>
+              </S.TextContentsWrapper>
+              <S.TextContentsWrapper>
+                <S.TextStyle>-등록시간:</S.TextStyle>
+                <div>{data?.fetchUseditem.createdAt.slice(0, 10)}</div>
+              </S.TextContentsWrapper>
+              <S.TextContentsWrapper>
+                <S.TextStyle>-상품정보:</S.TextStyle>
+                <div>{data?.fetchUseditem.contents}</div>
+              </S.TextContentsWrapper>
+              <S.TextContentsWrapper>
+                <S.TextStyle>-태그:</S.TextStyle>
+                <div>{data?.fetchUseditem.tags}</div>
+              </S.TextContentsWrapper>
+            </S.TitleContentsWrapper>
+          </S.TextWrapper>
+        </S.ImgContentsWrapper>
+
+        <S.TitleBottomWrapper>
+          <S.ImgWrapper>
             <KakaoMap />
-          </div>
-        </div>
-        <S.TextWrapper>
-          <S.TitleMainWrapper>
-            <S.titleWrapper>
-              {data ? data?.fetchUseditem.name : "로딩중"}
-            </S.titleWrapper>
-            <S.PriceWrappaer>{data?.fetchUseditem.price}원</S.PriceWrappaer>
-          </S.TitleMainWrapper>
-          <S.TitleBottomWrapper>
-            <S.TextContentsWrapper>
-              <S.TextStyle>-한줄요약:</S.TextStyle>
-              <div>{data ? data.fetchUseditem.remarks : "로딩"}</div>
-            </S.TextContentsWrapper>
-            <S.TextContentsWrapper>
-              <S.TextStyle>-찜개수:</S.TextStyle>
-              <div>{data?.fetchUseditem.pickedCount}</div>
-            </S.TextContentsWrapper>
-            <S.TextContentsWrapper>
-              <S.TextStyle>-등록시간:</S.TextStyle>
-              <div>{data?.fetchUseditem.createdAt.slice(0, 10)}</div>
-            </S.TextContentsWrapper>
-            <S.TextContentsWrapper>
-              <S.TextStyle>-상품정보:</S.TextStyle>
-              <div>{data?.fetchUseditem.contents}</div>
-            </S.TextContentsWrapper>
-            <S.TextContentsWrapper>
-              <S.TextStyle>-태그:</S.TextStyle>
-              <div>{data?.fetchUseditem.tags}</div>
-            </S.TextContentsWrapper>
+          </S.ImgWrapper>
+          <S.TextWrapper>
             <S.TextContentsWrapper>
               <S.TextStyle>-주소:</S.TextStyle>
               <div>{data?.fetchUseditem.useditemAddress?.address}</div>
@@ -68,12 +73,12 @@ const ProductDetailWriteUI = ({
               <S.TextStyle>-경도:</S.TextStyle>
               <div>{data?.fetchUseditem.useditemAddress?.lng}</div>
             </S.TextContentsWrapper>
-          </S.TitleBottomWrapper>
-        </S.TextWrapper>
+          </S.TextWrapper>
+        </S.TitleBottomWrapper>
       </S.MainWrapper>
       <S.MutationBtnWrapper>
         <S.MutationBtn onClick={onClickDelete}>글 삭제하기</S.MutationBtn>
-        <S.MutationBtn onClick={onClickMoveEdit}>글 수정하기</S.MutationBtn>
+        <S.MutationBtn>글 수정하기</S.MutationBtn>
       </S.MutationBtnWrapper>
     </>
   );
