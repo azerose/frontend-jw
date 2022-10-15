@@ -1,11 +1,13 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { errorMsg } from "../../../../commons/modal/modalFun";
 import {
   IMutation,
   IMutationDeleteUseditemArgs,
   IQuery,
   IQueryFetchUseditemArgs,
+  IUseditem,
 } from "../../../../commons/types/generated/types";
 import ProductDetailWriteUI from "./product.detail.presenter";
 import { DELETE_USEDITEM, FETCH_USEDITEM } from "./product.detail.query";
@@ -21,6 +23,20 @@ const ProductDetailWrite = () => {
     Pick<IMutation, "deleteUseditem">,
     IMutationDeleteUseditemArgs
   >(DELETE_USEDITEM);
+
+  // useEffect(() => {
+  //   localStorage.setItem("basket", JSON.stringify([router.query.id]));
+  //   const baskets = JSON.parse(localStorage.getItem("basket") ?? "[]"); // basket에 있는 값을 배열로 받음
+  //   const setArr = [...new Set(baskets.map(JSON.stringify))].map(JSON.parse);
+
+  //   if (setArr.length > 5) {
+  //     setArr.shift();
+  //   }
+  //   setArr.push(router.query.id);
+
+  //   localStorage.setItem("basket", JSON.stringify(setArr));
+  //   console.log(setArr);
+  // }, []);
 
   const onClickDelete = () => {
     try {

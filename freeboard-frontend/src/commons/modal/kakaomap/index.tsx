@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { FETCH_USEDITEM } from "../../../board/components/components/productdetail/product.detail.query";
 import { MapAddressState } from "../../store";
@@ -10,7 +10,6 @@ declare const window: typeof globalThis & { kakao: any };
 
 export default function KakaoMap() {
   const router = useRouter();
-
   const [MapAddress, setMapAddress] = useRecoilState(MapAddressState);
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditem">,
@@ -26,53 +25,45 @@ export default function KakaoMap() {
 
     script.onload = () => {
       window.kakao.maps.load(function () {
-        const container = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
-        const options = {
+        const mapContainer = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
+
+        const mapOption = {
           // 지도를 생성할 때 필요한 기본 옵션
           center: new window.kakao.maps.LatLng(
-            data ? data?.fetchUseditem.useditemAddress?.lat : 33.450701,
-            data ? data?.fetchUseditem.useditemAddress?.lng : 126.570667
+            data ? data?.fetchUseditem.useditemAddress?.lat : "",
+            data ? data?.fetchUseditem.useditemAddress?.lng : ""
           ), // 지도의 중심좌표.
           level: 3, // 지도의 레벨(확대, 축소 정도)
         };
 
+        const map = new window.kakao.maps.Map(mapContainer, mapOption); // 지도 생성 및 객체 리턴
         const geocoder = new window.kakao.maps.services.Geocoder();
 
-        const callback = function (result: any, status: any) {
+        geocoder.addressSearch(MapAddress, function (result: any, status: any) {
+          // 정상적으로 검색이 완료됐으면
           if (status === window.kakao.maps.services.Status.OK) {
-            console.log(result);
+            const coords = new window.kakao.maps.LatLng(
+              result[0].y,
+              result[0].x
+            );
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            const marker = new window.kakao.maps.Marker({
+              map: map,
+              position: coords,
+            });
+
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            var infowindow = new window.kakao.maps.InfoWindow({
+              content:
+                '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
+            });
+            infowindow.open(map, marker);
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
           }
-        };
-        geocoder.addressSearch(MapAddress, callback);
-
-        const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
-
-        const marker = new window.kakao.maps.Marker({
-          // 지도 중심좌표에 마커를 생성합니다
-          position: map.getCenter(),
         });
-        // 지도에 마커를 표시합니다
-        marker.setMap(map);
-
-        window.kakao.maps.event.addListener(
-          map,
-          "click",
-          function (mouseEvent: any) {
-            // 클릭한 위도, 경도 정보를 가져옵니다
-            const latlng = mouseEvent.latLng;
-
-            // 마커 위치를 클릭한 위치로 옮깁니다
-            marker.setPosition(latlng);
-
-            let resultInput = document.getElementById("clickLat");
-            resultInput.value = latlng.getLat();
-
-            let Lng = document.getElementById("clickLng");
-            Lng.value = latlng.getLng();
-
-            console.dir(resultInput);
-          }
-        );
       });
     };
   }, []);

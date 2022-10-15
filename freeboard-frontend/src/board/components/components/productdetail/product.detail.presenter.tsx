@@ -6,7 +6,6 @@ const ProductDetailWriteUI = ({
   data,
   onClickDelete,
 }: IProductDetailWriteUI) => {
-  console.log(data?.fetchUseditem.images);
   return (
     <>
       <S.MainWrapper>

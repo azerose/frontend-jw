@@ -84,6 +84,8 @@ const EnrollProduct = (props: IEnrollProps) => {
     setValue("contents", value);
   };
 
+  useEffect(() => {}, [MapAddress]);
+
   const onSubmitEnroll = async (data: IFormData) => {
     try {
       data.price = Number(data.price);

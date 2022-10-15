@@ -11,7 +11,7 @@ export const ProductWrapper = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 100%;
+  width: 1200px;
   gap: 20px;
 `;
 

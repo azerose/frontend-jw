@@ -3,6 +3,7 @@ import LayoutFooter from "./footer";
 import LayoutHeader from "./header";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import LayoutSideBar from "./sidebar";
 
 interface ILayoutProps {
   children: JSX.Element;
@@ -30,7 +31,10 @@ const Layout = (props: ILayoutProps) => {
     <Wrapper>
       <LayoutHeader />
       {!isHiddenBanner && <LayoutBanner />}
-      <div>{props.children}</div>
+      <div style={{ display: "flex" }}>
+        <div>{props.children}</div>
+        {/* <LayoutSideBar /> */}
+      </div>
       <LayoutFooter />
     </Wrapper>
   );
