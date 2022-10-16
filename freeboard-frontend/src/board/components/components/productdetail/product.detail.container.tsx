@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { errorMsg } from "../../../../commons/modal/modalFun";
 import {
   IMutation,
@@ -14,6 +14,8 @@ import { DELETE_USEDITEM, FETCH_USEDITEM } from "./product.detail.query";
 
 const ProductDetailWrite = () => {
   const router = useRouter();
+  const [getId, setGetId] = useState("");
+
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs

@@ -14,3 +14,8 @@ export const MapAddressState = atom({
   key: "MapAddressState",
   default: "",
 });
+
+export const QuestionIdState = atom({
+  key: "QuestionIdState",
+  default: "",
+});

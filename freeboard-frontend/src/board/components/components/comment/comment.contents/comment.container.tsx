@@ -8,8 +8,17 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ChangeEvent } from "react";
 import { errorMsg, success } from "../../../../../commons/modal/modalFun";
+import { IWriteComment } from "./comment.type";
+import {
+  CREATE_USEDITEM_QUESTION,
+  FETCH_USEDITEM_QUESTIONS,
+} from "./comment.queries";
+import {
+  IMutation,
+  IMutationCreateUseditemQuestionArgs,
+} from "../../../../../commons/types/generated/types";
 
-const WriteComment = () => {
+const WriteComment = ({ isMarket }: IWriteComment) => {
   const router = useRouter();
 
   const [writer, setWriter] = useState("");
@@ -18,6 +27,38 @@ const WriteComment = () => {
   const [comment, setComment] = useState("");
 
   const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT);
+  const [createUsedItemQuestion] = useMutation<
+    Pick<IMutation, "createUseditemQuestion">,
+    IMutationCreateUseditemQuestionArgs
+  >(CREATE_USEDITEM_QUESTION);
+
+  const onClickQuestion = async () => {
+    try {
+      await createUsedItemQuestion({
+        variables: {
+          createUseditemQuestionInput: {
+            contents: comment,
+          },
+          useditemId: String(router.query.id),
+        },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEM_QUESTIONS,
+            variables: {
+              useditemId: router.query.id,
+            },
+          },
+        ],
+      });
+      {
+        setComment("");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        errorMsg(error.message);
+      }
+    }
+  };
 
   const onClickCreateComment = async () => {
     if (writer && pw && comment && rating) {
@@ -90,9 +131,11 @@ const WriteComment = () => {
       onChangeWriter={onChangeWriter}
       onChangeCommentPassword={onChangeCommentPassword}
       onChangeRating={onChangeRating}
+      onClickQuestion={onClickQuestion}
       rating={Number(rating)}
       writer={writer}
       pw={pw}
+      isMarket={isMarket}
     />
   );
 };

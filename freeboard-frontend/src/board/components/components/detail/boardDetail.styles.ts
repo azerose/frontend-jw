@@ -76,6 +76,9 @@ export const CommentContents = styled.div`
   line-height: 24px;
   font-size: 16px;
 `;
+export const RepleDiv = styled.div`
+  margin-left: 50px;
+`;
 
 export const CommentDate = styled.div`
   font-size: 12px;
