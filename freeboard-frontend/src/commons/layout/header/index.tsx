@@ -32,6 +32,10 @@ const LayoutHeader = () => {
     router.push("/boards");
   };
 
+  const onClickMyPage = () => {
+    router.push("/Market/mypage");
+  };
+
   const onClickMarket = () => {
     router.push("/Market/newproducts");
   };
@@ -48,12 +52,12 @@ const LayoutHeader = () => {
           {data ? `${data?.fetchUserLoggedIn.name}님 환영합니다.` : ""}
         </S.DivWrapper>
         <S.DivWrapper>
-          <S.SellImg src="/sell.png/" onClick={onClickHome} />
-          <S.SellDiv>판매하기</S.SellDiv>
+          <S.SellImg src="/sell.png/" onClick={onClickMarket} />
+          <S.SellDiv onClick={onClickMarket}>판매하기</S.SellDiv>
         </S.DivWrapper>
         <S.DivWrapper>
-          <S.SellImg src="/login.png/" />
-          <S.SellDiv onClick={onClickMarket}>내상점</S.SellDiv>
+          <S.SellImg src="/login.png/" onClick={onClickMyPage} />
+          <S.SellDiv onClick={onClickMyPage}>내상점</S.SellDiv>
         </S.DivWrapper>
         <S.DivWrapper>
           <S.SellImg onClick={onClickBoards} src="/boards.png/" />

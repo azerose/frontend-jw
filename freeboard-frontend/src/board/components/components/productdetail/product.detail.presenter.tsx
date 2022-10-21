@@ -5,6 +5,8 @@ import KakaoMap from "../../../../commons/modal/kakaomap";
 const ProductDetailWriteUI = ({
   data,
   onClickDelete,
+  onClickBuy,
+  onClickLike,
 }: IProductDetailWriteUI) => {
   return (
     <>
@@ -72,6 +74,10 @@ const ProductDetailWriteUI = ({
               <S.TextStyle>-경도:</S.TextStyle>
               <div>{data?.fetchUseditem.useditemAddress?.lng}</div>
             </S.TextContentsWrapper>
+            <S.BtnWrapper>
+              <S.BuyBtn onClick={onClickBuy}>바로구매</S.BuyBtn>
+              <S.BuyBtn onClick={onClickLike}>찜하기</S.BuyBtn>
+            </S.BtnWrapper>
           </S.TextWrapper>
         </S.TitleBottomWrapper>
       </S.MainWrapper>

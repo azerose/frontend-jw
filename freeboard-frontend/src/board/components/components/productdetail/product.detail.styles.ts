@@ -76,3 +76,19 @@ export const MapDiv = styled.div`
   height: 30%;
   margin: 50px 0;
 `;
+
+export const BtnWrapper = styled.div`
+  margin: 80px;
+  display: flex;
+`;
+
+export const BuyBtn = styled.button`
+  background: rgb(247, 0, 0);
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  border: 1px solid rgb(247, 0, 0);
+  width: 50%;
+  height: 60px;
+  margin: 0 20px 0 0;
+  cursor: pointer;
+`;

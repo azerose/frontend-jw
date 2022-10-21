@@ -19,3 +19,13 @@ export const QuestionIdState = atom({
   key: "QuestionIdState",
   default: "",
 });
+
+export const MapLatState = atom({
+  key: "MapLatState",
+  default: "",
+});
+
+export const MapLngState = atom({
+  key: "MapLangState",
+  default: "",
+});

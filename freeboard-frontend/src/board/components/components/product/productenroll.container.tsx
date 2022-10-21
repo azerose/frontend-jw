@@ -21,7 +21,11 @@ import { Myyup } from "./productenroll.schema";
 import { checkValidationFile } from "../../../commons/validation/validationFile";
 import { Modal } from "antd";
 import { useRecoilState } from "recoil";
-import { MapAddressState } from "../../../../commons/store";
+import {
+  MapAddressState,
+  MapLatState,
+  MapLngState,
+} from "../../../../commons/store";
 
 const EnrollProduct = (props: IEnrollProps) => {
   const router = useRouter();
@@ -72,14 +76,6 @@ const EnrollProduct = (props: IEnrollProps) => {
     setIsMapOpen(false);
   };
 
-  const onChangeLat = (value: number) => {
-    setValue("useditemAddress.lat", value);
-  };
-
-  const onChangeLng = (value: number) => {
-    setValue("useditemAddress.lng", value);
-  };
-
   const onChangeContents = (value: string) => {
     setValue("contents", value);
   };
@@ -98,6 +94,7 @@ const EnrollProduct = (props: IEnrollProps) => {
           createUseditemInput: data,
         },
       });
+      console.log(data);
       success("상품이 등록되었습니다");
       router.push("/");
     } catch (error) {
@@ -153,13 +150,12 @@ const EnrollProduct = (props: IEnrollProps) => {
       isMapOpen={isMapOpen}
       onClickMapSearch={onClickMapSearch}
       onClickMapCancel={onClickMapCancel}
-      onChangeLat={onChangeLat}
-      onChangeLng={onChangeLng}
       MapAddress={MapAddress}
       isEdit={props.isEdit}
       onClickEdit={onClickEdit}
       data={props.data}
       onChangeContents={onChangeContents}
+      setValue={setValue}
     />
   );
 };

@@ -2,6 +2,8 @@ import { useQuery } from "@apollo/client";
 import { FETCH_USEDITEMS } from "../../../board/components/components/productList/productList.queries";
 import { IQuery, IQueryFetchUseditemsArgs } from "../../types/generated/types";
 
+import * as S from "./sidebar.styles";
+
 const LayoutSideBar = () => {
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditems">,
@@ -21,14 +23,23 @@ const LayoutSideBar = () => {
 
   return (
     <>
-      <div>
-        <div className="header">오늘 본 상품</div>
-        {/* {data?.fetchUseditems.map((el) => (
-          <div key={el._id}>
-            <img src={`https://storage.googleapis.com/${el.images[0]}`} />
-          </div>
-        ))} */}
-      </div>
+      <S.SidebarWrapper>
+        <S.Text>최근 본 상품</S.Text>
+        <S.ImgWrapper>
+          {get_local !== null
+            ? get_local.map((a, i) => {
+                return (
+                  <div>
+                    <img
+                      style={{ width: "100%", height: "100%" }}
+                      src={`https://storage.googleapis.com/${get_local[i]}`}
+                    />
+                  </div>
+                );
+              })
+            : null}
+        </S.ImgWrapper>
+      </S.SidebarWrapper>
     </>
   );
 };

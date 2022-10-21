@@ -3,14 +3,16 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { FETCH_USEDITEM } from "../../../board/components/components/productdetail/product.detail.query";
-import { MapAddressState } from "../../store";
+import { MapAddressState, MapLatState, MapLngState } from "../../store";
 import { IQuery, IQueryFetchUseditemArgs } from "../../types/generated/types";
 
 declare const window: typeof globalThis & { kakao: any };
 
-export default function KakaoMap() {
+export default function KakaoMap(props) {
   const router = useRouter();
   const [MapAddress, setMapAddress] = useRecoilState(MapAddressState);
+  const [MapLat, setMapLat] = useRecoilState(MapLatState);
+  const [MapLng, setMapLng] = useRecoilState(MapLngState);
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
@@ -46,7 +48,10 @@ export default function KakaoMap() {
               result[0].y,
               result[0].x
             );
-
+            props.setValue("useditemAddress.lat", Number(result[0].x));
+            props.setValue("useditemAddress.lng", Number(result[0].y));
+            setMapLat(result[0].x);
+            setMapLng(result[0].y);
             // 결과값으로 받은 위치를 마커로 표시합니다
             const marker = new window.kakao.maps.Marker({
               map: map,
@@ -54,11 +59,11 @@ export default function KakaoMap() {
             });
 
             // 인포윈도우로 장소에 대한 설명을 표시합니다
-            var infowindow = new window.kakao.maps.InfoWindow({
-              content:
-                '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
-            });
-            infowindow.open(map, marker);
+            // var infowindow = new window.kakao.maps.InfoWindow({
+            //   content:
+            //     '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
+            // });
+            // infowindow.open(map, marker);
 
             // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
             map.setCenter(coords);

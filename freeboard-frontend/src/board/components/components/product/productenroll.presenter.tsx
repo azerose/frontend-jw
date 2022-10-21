@@ -3,6 +3,8 @@ import * as S from "./productenroll.styles";
 import { IEnrollProductUI } from "./productenroll.types";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { MapLatState, MapLngState } from "../../../../commons/store";
+import { useRecoilState } from "recoil";
 
 const EnrollProductUI = ({
   isOpen,
@@ -18,14 +20,16 @@ const EnrollProductUI = ({
   isMapOpen,
   onClickMapSearch,
   onClickMapCancel,
-  onChangeLat,
-  onChangeLng,
   MapAddress,
   isEdit,
   onClickEdit,
   data,
   onChangeContents,
+  setValue,
 }: IEnrollProductUI) => {
+  const [MapLat, setMapLat] = useRecoilState(MapLatState);
+  const [MapLng, setMapLng] = useRecoilState(MapLngState);
+
   return (
     <>
       {isMapOpen && (
@@ -34,7 +38,7 @@ const EnrollProductUI = ({
           onOk={onClickMapCancel}
           onCancel={onClickMapCancel}
         >
-          <KakaoMap />
+          <KakaoMap setValue={setValue} />
         </S.AddressModal>
       )}
       {isOpen && (
@@ -124,12 +128,12 @@ const EnrollProductUI = ({
                 <S.LatInput
                   id={"clickLat"}
                   placeholder="위도(LAT)"
-                  onChange={onChangeLat}
+                  value={MapLat}
                 />
                 <S.LngInput
                   id={"clickLng"}
                   placeholder="경도(LNG)"
-                  onChange={onChangeLng}
+                  value={MapLng}
                 />
               </S.AddressInputWrapper>
             </S.AddressBtnWrapper>
