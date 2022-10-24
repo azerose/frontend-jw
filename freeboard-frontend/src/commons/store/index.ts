@@ -29,3 +29,8 @@ export const MapLngState = atom({
   key: "MapLangState",
   default: "",
 });
+
+export const WatchedState = atom({
+  key: "WatchedState",
+  default: [],
+});

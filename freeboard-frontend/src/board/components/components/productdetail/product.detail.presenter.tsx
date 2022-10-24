@@ -1,12 +1,15 @@
 import { IProductDetailWriteUI } from "./product.detail.types";
 import * as S from "./product.detail.styles";
 import KakaoMap from "../../../../commons/modal/kakaomap";
+import dynamic from "next/dynamic";
+import DOMPurify from "dompurify";
 
 const ProductDetailWriteUI = ({
   data,
   onClickDelete,
   onClickBuy,
   onClickLike,
+  onClickMoveEdit,
 }: IProductDetailWriteUI) => {
   return (
     <>
@@ -47,7 +50,13 @@ const ProductDetailWriteUI = ({
               </S.TextContentsWrapper>
               <S.TextContentsWrapper>
                 <S.TextStyle>-상품정보:</S.TextStyle>
-                <div>{data?.fetchUseditem.contents}</div>
+                {process.browser && (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(data?.fetchUseditem.contents),
+                    }}
+                  ></div>
+                )}
               </S.TextContentsWrapper>
               <S.TextContentsWrapper>
                 <S.TextStyle>-태그:</S.TextStyle>
@@ -83,7 +92,7 @@ const ProductDetailWriteUI = ({
       </S.MainWrapper>
       <S.MutationBtnWrapper>
         <S.MutationBtn onClick={onClickDelete}>글 삭제하기</S.MutationBtn>
-        <S.MutationBtn>글 수정하기</S.MutationBtn>
+        <S.MutationBtn onClick={onClickMoveEdit}>글 수정하기</S.MutationBtn>
       </S.MutationBtnWrapper>
     </>
   );

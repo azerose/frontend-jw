@@ -1,10 +1,14 @@
 import KakaoMap from "../../../../commons/modal/kakaomap";
 import * as S from "./productenroll.styles";
 import { IEnrollProductUI } from "./productenroll.types";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { MapLatState, MapLngState } from "../../../../commons/store";
 import { useRecoilState } from "recoil";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(async () => await import("react-quill"), {
+  ssr: false,
+});
 
 const EnrollProductUI = ({
   isOpen,

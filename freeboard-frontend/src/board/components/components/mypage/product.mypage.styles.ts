@@ -42,9 +42,10 @@ export const NameWrapper = styled.div`
 
 export const PointWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  width: 40%;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const PointStyle = styled.div`

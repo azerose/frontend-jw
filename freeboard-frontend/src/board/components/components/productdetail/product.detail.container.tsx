@@ -1,7 +1,9 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import { errorMsg } from "../../../../commons/modal/modalFun";
+import { WatchedState } from "../../../../commons/store";
 import {
   IMutation,
   IMutationCreatePointTransactionOfBuyingAndSellingArgs,
@@ -21,6 +23,7 @@ declare const window: typeof globalThis & { kakao: any };
 
 const ProductDetailWrite = () => {
   const router = useRouter();
+  const [watched, setWatched] = useRecoilState(WatchedState);
   const [createPointTransactionOfBuyingAndSelling] = useMutation<
     Pick<IMutation, "createPointTransactionOfBuyingAndSelling">,
     IMutationCreatePointTransactionOfBuyingAndSellingArgs
@@ -43,12 +46,20 @@ const ProductDetailWrite = () => {
 
   useEffect(() => {
     if (sessionStorage.watched === undefined) {
-      sessionStorage.setItem("watched", JSON.stringify([]));
+      sessionStorage.setItem("watched", JSON.stringify([""]));
     }
     let watched = JSON.parse(sessionStorage.getItem("watched"));
-    watched.unshift(data?.fetchUseditem.images[0]);
-    watched = [...new Set(watched)].slice(0, 3);
-    sessionStorage.setItem("watched", JSON.stringify(watched));
+    const watchFilter = watched.filter(
+      (el) => el === data?.fetchUseditem.images?.[0]
+    );
+    if (watchFilter.length === 1) return;
+
+    if (watched.length === 3) watched.pop();
+    if (data?.fetchUseditem.images?.[0] !== undefined) {
+      watched.unshift(data?.fetchUseditem.images?.[0]);
+      sessionStorage.setItem("watched", JSON.stringify(watched));
+      setWatched(watched);
+    }
 
     const script = document.createElement("script");
     script.src =
@@ -103,7 +114,7 @@ const ProductDetailWrite = () => {
         );
       });
     };
-  });
+  }, [data]);
 
   const onClickLike = () => {
     try {

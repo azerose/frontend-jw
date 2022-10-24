@@ -15,7 +15,9 @@ const ProductListWrite = () => {
   const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditems">,
     IQueryFetchUseditemsArgs
-  >(FETCH_USEDITEMS);
+  >(FETCH_USEDITEMS, {
+    fetchPolicy: "cache-and-network",
+  });
 
   const onLoadMore = () => {
     if (data === undefined) return;

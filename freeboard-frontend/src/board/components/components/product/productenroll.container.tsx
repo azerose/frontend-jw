@@ -26,6 +26,7 @@ import {
   MapLatState,
   MapLngState,
 } from "../../../../commons/store";
+import { FETCH_USEDITEM } from "../productdetail/product.detail.query";
 
 const EnrollProduct = (props: IEnrollProps) => {
   const router = useRouter();
@@ -121,11 +122,20 @@ const EnrollProduct = (props: IEnrollProps) => {
     try {
       console.log(typeof Number(data.price));
       data.price = Number(data.price);
+      data.images = imgUrl;
       const result = await updateUsedItem({
         variables: {
           updateUseditemInput: data,
           useditemId: String(router.query.id),
         },
+        refetchQueries: [
+          {
+            query: FETCH_USEDITEM,
+            variables: {
+              useditemId: router.query.id,
+            },
+          },
+        ],
       });
       router.push(`/Market/detail/${result?.data?.updateUseditem._id}`);
     } catch (error) {

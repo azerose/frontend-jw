@@ -39,21 +39,6 @@ const MyPageWriteUI = ({
             </S.ChargeWrapper>
           </S.PointWrapper>
         </S.OptionWrapper>
-        <S.ListWrapper>
-          <S.ListOptionWrapper>
-            <div>내찜목록</div>
-            <div>장바구니</div>
-            <div>내가 등록한 상품</div>
-          </S.ListOptionWrapper>
-          <div>
-            <div>
-              <div>번호</div>
-              <div>상품명</div>
-              <div>판매가격</div>
-              <div>날짜</div>
-            </div>
-          </div>
-        </S.ListWrapper>
       </S.MainWrapper>
     </>
   );

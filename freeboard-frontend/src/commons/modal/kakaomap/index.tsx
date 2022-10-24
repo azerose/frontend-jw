@@ -48,8 +48,8 @@ export default function KakaoMap(props) {
               result[0].y,
               result[0].x
             );
-            props.setValue("useditemAddress.lat", Number(result[0].x));
-            props.setValue("useditemAddress.lng", Number(result[0].y));
+            // props.setValue("useditemAddress.lat", Number(result[0].x));
+            // props.setValue("useditemAddress.lng", Number(result[0].y));
             setMapLat(result[0].x);
             setMapLng(result[0].y);
             // 결과값으로 받은 위치를 마커로 표시합니다

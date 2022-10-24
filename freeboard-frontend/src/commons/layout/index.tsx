@@ -33,7 +33,7 @@ const Layout = (props: ILayoutProps) => {
       {!isHiddenBanner && <LayoutBanner />}
       <div style={{ display: "flex" }}>
         <div>{props.children}</div>
-        {/* <LayoutSideBar /> */}
+        <LayoutSideBar />
       </div>
       <LayoutFooter />
     </Wrapper>
