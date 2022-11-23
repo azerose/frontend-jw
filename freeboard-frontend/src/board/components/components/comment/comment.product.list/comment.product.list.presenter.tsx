@@ -32,7 +32,7 @@ const ProductCommentListUI = ({
       <St.CommentWatchBox>
         <St.CommentRow>
           <div>
-            <St.CommentWriter>{el.user.name}</St.CommentWriter>
+            <St.CommentWriter>{el.user?.name}</St.CommentWriter>
             <div>
               <St.DeleteBtn id={el._id} onClick={onSaveCommentId}>
                 <img src="/delete.png" />

@@ -157,6 +157,7 @@ const Board = (props: IBoardProps) => {
   const onCompleteAddressSearch = (data: any) => {
     setInput({ ...input, addo: data.address, add: data.zonecode });
     setIsOpen((prev) => !prev);
+    console.log(data);
   };
 
   const onClickHandleCancel = () => {
@@ -164,8 +165,9 @@ const Board = (props: IBoardProps) => {
   };
 
   useEffect(() => {
+    console.log(props.data);
     if (props.data) {
-      setImgUrl(props.data?.fetchBoard.images);
+      setImgUrl([String(props.data?.fetchBoard.images)]);
     }
   }, [props.data]);
   // console.log(imgUrl);
@@ -251,7 +253,7 @@ const Board = (props: IBoardProps) => {
   };
 
   const onChangeFile =
-    (index: number) => async (event: ChangeEvent<HTMLInputElement>) => {
+    (index: any) => async (event: ChangeEvent<HTMLInputElement>) => {
       console.log(event.currentTarget.className[0]);
       console.log(imgUrl);
       const file = event.target.files?.[0];
@@ -261,7 +263,7 @@ const Board = (props: IBoardProps) => {
       try {
         const result = await uploadFile({ variables: { file } });
         let newImgUrls = [...imgUrl];
-        newImgUrls[index] = result.data?.uploadFile.url;
+        newImgUrls[index] = String(result.data?.uploadFile.url);
         setImgUrl(newImgUrls);
         console.log(result);
       } catch (error) {

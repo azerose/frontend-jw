@@ -21,5 +21,7 @@ export interface IEl {
   _id: string;
   createdAt: Date;
   contents: string;
-  user?: Maybe<string> | undefined;
+  user?: {
+    name: string;
+  };
 }

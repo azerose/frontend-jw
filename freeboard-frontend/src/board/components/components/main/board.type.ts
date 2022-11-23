@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, ChangeEventHandler, MouseEvent } from "react";
 import { IMutation, IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardProps {
@@ -29,7 +29,7 @@ export interface IBoardWriteUI {
   onClickAddressSearch: (event: MouseEvent<HTMLButtonElement>) => void;
   onClickHandleCancel: () => void;
   onCompleteAddressSearch: (data: any) => void;
-  onChangeFile: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFile: any;
   ner: string;
   per: string;
   ter: string;
@@ -42,6 +42,5 @@ export interface IBoardWriteUI {
   isOpen: boolean;
   add: string;
   addo: string;
-  fileRef: any;
   imgUrl: any;
 }
