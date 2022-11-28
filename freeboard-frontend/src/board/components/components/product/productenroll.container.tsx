@@ -111,7 +111,7 @@ const EnrollProduct = (props: IEnrollProps) => {
       try {
         const result = await uploadFile({ variables: { file } });
         const newImgUrls = [...imgUrl];
-        newImgUrls[index] = result.data?.uploadFile.url;
+        newImgUrls[index] = String(result.data?.uploadFile.url);
         setImgUrl(newImgUrls);
       } catch (error) {
         if (error instanceof Error) Modal.error({ content: error.message });

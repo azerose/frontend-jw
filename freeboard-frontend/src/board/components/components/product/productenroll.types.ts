@@ -18,13 +18,15 @@ export interface IEnrollProductUI {
   onClickMapCancel: () => void;
   onClickEdit: (data: IFormData) => void;
   MapAddress: string;
-  // handleSubmit:
+  handleSubmit: any;
   onChangeFile: any;
   imgUrl: string[];
   formState: any;
   isMapOpen: boolean;
   isEdit: boolean;
   data: Pick<IQuery, "fetchUseditem">;
+  onChangeContents: (value: string) => void;
+  setValue: any;
 }
 
 interface UseditemAddressinput {
