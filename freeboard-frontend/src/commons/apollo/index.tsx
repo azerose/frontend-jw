@@ -55,7 +55,7 @@ const ApolloSetting = (props: IApolloSetting) => {
   });
 
   const uploadLink = createUploadLink({
-    uri: "https://backend09.codebootcamp.co.kr/graphql",
+    uri: "https://backend09.codebootcamp.co.kr/graphql04",
     headers: { Authorization: `Bearer ${accessToken}` },
     credentials: "include",
   });
