@@ -31,8 +31,8 @@ const EnrollProductUI = ({
   onChangeContents,
   setValue,
 }: IEnrollProductUI) => {
-  const [MapLat, setMapLat] = useRecoilState(MapLatState);
-  const [MapLng, setMapLng] = useRecoilState(MapLngState);
+  const [MapLat] = useRecoilState(MapLatState);
+  const [MapLng] = useRecoilState(MapLngState);
 
   return (
     <>
