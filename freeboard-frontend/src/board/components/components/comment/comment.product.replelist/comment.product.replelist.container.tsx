@@ -15,7 +15,7 @@ import {
 } from "./comment.product.replelist.queries";
 
 const RepleListWrite = () => {
-  const [QuestionId, setQustionId] = useRecoilState(QuestionIdState);
+  const [QuestionId, _] = useRecoilState(QuestionIdState);
   const [getSaveCommentId, setGetSaveCommentId] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [contents, setContents] = useState("");
@@ -99,6 +99,7 @@ const RepleListWrite = () => {
     <>
       {data?.fetchUseditemQuestionAnswers.map((el) => (
         <RepleListWriteUI
+          QuestionId={QuestionId}
           el={el}
           onSaveCommentId={onSaveCommentId}
           isOpen={isOpen}
