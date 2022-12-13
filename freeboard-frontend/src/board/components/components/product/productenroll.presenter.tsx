@@ -42,7 +42,7 @@ const EnrollProductUI = ({
           onOk={onClickMapCancel}
           onCancel={onClickMapCancel}
         >
-          <KakaoMap setValue={setValue} />
+          <KakaoMap />
         </S.AddressModal>
       )}
       {isOpen && (
