@@ -8,11 +8,11 @@ import { IQuery, IQueryFetchUseditemArgs } from "../../types/generated/types";
 
 declare const window: typeof globalThis & { kakao: any };
 
-export default function KakaoMap(props) {
+export default function KakaoMap() {
   const router = useRouter();
-  const [MapAddress, setMapAddress] = useRecoilState(MapAddressState);
-  const [MapLat, setMapLat] = useRecoilState(MapLatState);
-  const [MapLng, setMapLng] = useRecoilState(MapLngState);
+  const [MapAddress, _] = useRecoilState(MapAddressState);
+  const [, setMapLat] = useRecoilState(MapLatState);
+  const [, setMapLng] = useRecoilState(MapLngState);
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs
