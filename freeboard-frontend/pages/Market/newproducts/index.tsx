@@ -4,7 +4,7 @@ import withAuth from "../../../src/commons/hocs/withAuth";
 const EnrollPage = () => {
   withAuth();
 
-  return <EnrollProduct />;
+  return <EnrollProduct isEdit={false} />;
 };
 
 export default EnrollPage;

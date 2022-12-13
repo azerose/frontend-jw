@@ -3,8 +3,8 @@ import { UseFormRegister } from "react-hook-form";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IEnrollProps {
-  data: Pick<IQuery, "fetchUseditem"> | undefined;
-  isEdit: boolean;
+  data?: Pick<IQuery, "fetchUseditem"> | undefined;
+  isEdit?: boolean;
 }
 
 export interface IEnrollProductUI {
