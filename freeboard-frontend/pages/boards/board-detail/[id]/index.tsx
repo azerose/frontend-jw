@@ -49,7 +49,7 @@ const DetailBoard = () => {
   return (
     <S.Img_Wrapper>
       <DetailPage />
-      <WriteComment />
+      <WriteComment isMarket={false} />
       <InfiniteScroll
         pageStart={0}
         loadMore={onChangeLoadmore}
