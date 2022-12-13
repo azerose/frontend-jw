@@ -3,7 +3,7 @@ import { UseFormRegister } from "react-hook-form";
 import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IEnrollProps {
-  data: Pick<IQuery, "fetchUseditem">;
+  data: Pick<IQuery, "fetchUseditem"> | undefined;
   isEdit: boolean;
 }
 
@@ -24,7 +24,7 @@ export interface IEnrollProductUI {
   formState: any;
   isMapOpen: boolean;
   isEdit: boolean;
-  data: Pick<IQuery, "fetchUseditem">;
+  data: Pick<IQuery, "fetchUseditem"> | undefined;
   onChangeContents: (value: string) => void;
   setValue: any;
 }

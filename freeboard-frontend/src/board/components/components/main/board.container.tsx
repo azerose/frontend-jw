@@ -54,7 +54,6 @@ const Board = (props: IBoardProps) => {
     lk: "",
   });
 
-  // console.log(input);
   const onChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, name: event.target.value });
     if (

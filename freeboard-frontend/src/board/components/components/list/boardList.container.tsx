@@ -16,7 +16,6 @@ const ListWatch = () => {
   const [startPage, setStartPage] = useState(1);
   const [isChange, setIsChange] = useState(1); //현재 페이지의 아이디를 담아두는 곳
   const [search, setSearch] = useState("");
-  const [searchPage, setSearchPage] = useState(0);
 
   const { RangePicker } = DatePicker;
   const dateFormat = "YYYY-MM-DD";
