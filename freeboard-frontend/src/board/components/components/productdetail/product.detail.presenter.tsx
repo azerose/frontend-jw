@@ -53,7 +53,9 @@ const ProductDetailWriteUI = ({
                 {process.browser && (
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: DOMPurify.sanitize(data?.fetchUseditem.contents),
+                      __html: DOMPurify.sanitize(
+                        String(data?.fetchUseditem.contents)
+                      ),
                     }}
                   ></div>
                 )}
