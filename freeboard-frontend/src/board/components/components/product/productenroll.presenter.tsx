@@ -29,7 +29,6 @@ const EnrollProductUI = ({
   onClickEdit,
   data,
   onChangeContents,
-  setValue,
 }: IEnrollProductUI) => {
   const [MapLat] = useRecoilState(MapLatState);
   const [MapLng] = useRecoilState(MapLngState);
