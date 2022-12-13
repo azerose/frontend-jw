@@ -48,9 +48,9 @@ const ProductDetailWrite = () => {
     if (sessionStorage.watched === undefined) {
       sessionStorage.setItem("watched", JSON.stringify([""]));
     }
-    let watched = JSON.parse(sessionStorage.getItem("watched"));
+    let watched = JSON.parse(String(sessionStorage.getItem("watched")));
     const watchFilter = watched.filter(
-      (el) => el === data?.fetchUseditem.images?.[0]
+      (el: any) => el === data?.fetchUseditem.images?.[0]
     );
     if (watchFilter.length === 1) return;
 
@@ -85,7 +85,7 @@ const ProductDetailWrite = () => {
         const geocoder = new window.kakao.maps.services.Geocoder();
 
         geocoder.addressSearch(
-          data?.fetchUseditem.useditemAddress.address,
+          data?.fetchUseditem?.useditemAddress?.address,
           function (result: any, status: any) {
             // 정상적으로 검색이 완료됐으면
             if (status === window.kakao.maps.services.Status.OK) {
