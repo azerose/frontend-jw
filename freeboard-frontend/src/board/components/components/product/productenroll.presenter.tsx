@@ -38,7 +38,7 @@ const EnrollProductUI = ({
     <>
       {isMapOpen && (
         <S.AddressModal
-          visible={true}
+          open={true}
           onOk={onClickMapCancel}
           onCancel={onClickMapCancel}
         >

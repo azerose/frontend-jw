@@ -4,7 +4,7 @@ import { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IEnrollProps {
   data?: Pick<IQuery, "fetchUseditem"> | undefined;
-  isEdit?: boolean;
+  isEdit: boolean;
 }
 
 export interface IEnrollProductUI {

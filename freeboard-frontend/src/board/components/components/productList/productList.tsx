@@ -49,7 +49,7 @@ const ProductListWrite = () => {
         <h2>오늘의 상품 추천</h2>
         <InfiniteScroll pageStart={0} hasMore={true} loadMore={onLoadMore}>
           <S.ProductWrapper>
-            {data?.fetchUseditems.map((el) => (
+            {data?.fetchUseditems.map((el: any) => (
               <S.MainWrapper key={el._id}>
                 <S.ImgWrapper>
                   <img
