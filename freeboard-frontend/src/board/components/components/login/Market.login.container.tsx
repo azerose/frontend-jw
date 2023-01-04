@@ -16,7 +16,7 @@ const MarketLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [, setAccessToken] = useRecoilState(accessTokenState);
 
   const [loginUser] = useMutation<
     Pick<IMutation, "loginUser">,

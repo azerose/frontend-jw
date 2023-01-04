@@ -22,7 +22,7 @@ const CommentListUI = ({
     <>
       {isOpen && (
         <St.PasswordModal
-          visible={true}
+          open={true}
           onOk={onClickDeleteComment}
           onCancel={onClickModalCancel}
         >

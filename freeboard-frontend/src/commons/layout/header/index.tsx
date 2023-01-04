@@ -1,6 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { accessTokenState, isTokenState } from "../../store";
 import { IQuery } from "../../types/generated/types";
@@ -17,8 +16,6 @@ const FETCH_USER_LOGGED_IN = gql`
 `;
 
 const LayoutHeader = () => {
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
-  const [change, setChange] = useState(false);
   const router = useRouter();
 
   const { data } =

@@ -21,7 +21,7 @@ const WatchCommentList = ({ el, fetchMore, data }: IWatchCommentList) => {
   const [updateBoardCommemt] = useMutation(UPDATE_BOARD_COMMENT);
 
   const [udWriter, setUdWriter] = useState("");
-  const [udpassword, setPassword] = useState("");
+  const [udpassword, setUdPassword] = useState("");
   const [udContents, setContents] = useState("");
 
   const [onUpdateComment, setOnUpdateComment] = useState(false);
@@ -41,7 +41,7 @@ const WatchCommentList = ({ el, fetchMore, data }: IWatchCommentList) => {
   };
 
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
+    setUdPassword(event.target.value);
   };
   const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContents(event.target.value);
