@@ -12,15 +12,13 @@ class MaxHeap {
       const temp = this.heap[parentIndex];
       this.heap[parentIndex] = value;
       this.heap[currentIndex] = temp;
-
       currentIndex = parentIndex;
       parentIndex = Math.floor(currentIndex / 2);
     }
   }
 
   pop() {
-    if (this.heap.length === 2) return this.heap.pop(); // 루트 정점만 남은 경우
-
+    if (this.heap.length === 2) return this.heap.pop();
     const returnValue = this.heap[1];
     this.heap[1] = this.heap.pop();
 
@@ -43,25 +41,28 @@ class MaxHeap {
         currentIndex = leftIndex;
       }
       leftIndex = currentIndex * 2;
-      rightIndex = currentIndex * 2 + 1;
+      rightIndex = leftIndex + 1;
     }
-
     return returnValue;
+  }
+  array() {
+    return this.heap.slice(1);
   }
 }
 
-const heap = new MaxHeap();
+function solution(no, works) {
+  if (works.reduce((arr, cur) => arr + cur, 0) <= no) return 0;
+  const heap = new MaxHeap();
 
-heap.push(45);
-heap.push(36);
-heap.push(54);
-heap.push(27);
-heap.push(63);
-console.log(heap.heap);
-
-const array = [];
-array.push(heap.pop());
-array.push(heap.pop());
-array.push(heap.pop());
-array.push(heap.pop());
-array.push(heap.pop());
+  works.forEach((el) => heap.push(el));
+  for (let i = 0; i < no; i++) {
+    let v = heap.pop();
+    heap.push(v - 1);
+  }
+  console.log(heap.array());
+  let result = 0;
+  heap.array().map((el) => {
+    result += el ** 2;
+  });
+  return result;
+}
